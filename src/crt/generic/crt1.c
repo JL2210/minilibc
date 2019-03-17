@@ -13,5 +13,8 @@ extern int main(int argc, char **argv, char **envp);
 
 void _start(void)
 {
-	__libc_start_main(main, 0, (char **){NULL}, _init, _fini, NULL, NULL);
+	char argv[1];
+	argv[1] = '\0';
+
+	__libc_start_main(main, 0, &argv, _init, _fini, NULL, NULL);
 }

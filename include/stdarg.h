@@ -1,6 +1,8 @@
 #ifndef _STDARG_H
 #define _STDARG_H 1
 
+#include <stdlib.h>
+
 struct
 {
 	int arg;
@@ -8,8 +10,8 @@ struct
 } _va_list;
 typedef struct _va_list va_list;
 
-#define va_start(x, y) (x = (va_list)calloc(1, sizeof(_va_list)); \
-			x->arg = 0; \
-			x->ptr = (void *)(((intptr_t)&y) + sizeof(y)))
+#define va_start(x, y)	(x = (va_list)calloc(1, sizeof(_va_list))); \
+			(x->arg = 0); \
+			(x->ptr = (void *)(((intptr_t)&y) + sizeof(y)))
 
 #endif

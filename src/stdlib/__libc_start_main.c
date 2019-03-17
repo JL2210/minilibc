@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <stdio.h>
+#include <stddef.h>
 
 int __libc_start_main
 (
@@ -12,13 +12,17 @@ void (*rtld_fini)(void),
 void *stack_end
 )
 {
+	int ret;
+	char *envp = NULL;
 
-	char **envp = {NULL};
+	(void)rtld_fini;
+	(void)stack_end;
 	if( (argc != 0) && (argv != NULL) )
-		envp = argv + argc + 1;
+		envp = *(argv + argc + 1);
 
 	_init();
-	exit(main(argc, argv, envp));
+	ret = main(argc, argv, &envp);
+	_fini();
 
-	return 0;
+	exit(ret);
 }

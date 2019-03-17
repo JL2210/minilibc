@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <stdio.h>
+#include <stddef.h>
 #include <limits.h>
 #include <stdint.h>
 
@@ -20,11 +20,11 @@ _Noreturn void exit(int ret)
 	for( ctr = 0; ctr < atexit_ctr; ctr++ )
 		(atexit_arr[ctr])();
 	_exit(ret);
-	while(1);
 }
 
 _Noreturn void _exit(int ret)
 {
+	(void)ret;
 	_fini();
 	while(1);
 }
