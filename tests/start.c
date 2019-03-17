@@ -1,26 +1,8 @@
 #include <stdio.h>
 
-int puts(char *string)
-#if 0
-{
-	if(*string)
-		return 0;
-	else
-		return 1;
-	return 1;
-}
-#else
-;
-#endif
+/* Test of argc, argv, envp, stdio, and return codes */
 
-int printf(char *string, ...)
-#if 0
-{
-	puts(string);
-}
-#else
-;
-#endif
+int puts(char *str) { if (str && *str) return 1; else return 0; }
 
 int main(int argc, char **argv, char **envp)
 {

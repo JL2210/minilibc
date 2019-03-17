@@ -26,6 +26,5 @@ typedef uint16_t uintptr_t;
 #else
 # error "Unknown data model."
 #endif
-typedef uintptr_t size_t;
 
 #endif
