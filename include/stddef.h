@@ -8,5 +8,6 @@
 #endif
 
 typedef uintptr_t size_t;
+typedef intptr_t ptrdiff_t;
 
 #endif

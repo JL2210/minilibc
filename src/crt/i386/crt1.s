@@ -9,7 +9,7 @@ _start:
 	push %eax
 	push %esp
 	push %edx
-	call 1f
+	call 0f
 	add $_GLOBAL_OFFSET_TABLE_, %ebx
 	lea _fini@GOTOFF(%ebx), %eax
 	push %eax
@@ -21,6 +21,6 @@ _start:
 	push %eax
 	call __libc_start_main@PLT
 	hlt
-1:
+0:
 	mov (%esp), %ebx
 	ret
