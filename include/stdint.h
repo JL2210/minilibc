@@ -28,8 +28,10 @@ typedef unsigned int uint32_t;
 #else
 typedef unsigned long uint32_t;
 #endif
+#ifndef PTR16
 typedef long long int64_t;
 typedef unsigned long long uint64_t;
+#endif
 #if defined(PTR64)
 typedef int64_t intptr_t;
 typedef uint64_t uintptr_t;
@@ -43,7 +45,8 @@ typedef uint16_t uintptr_t;
 # error "Unknown data model."
 #endif
 
-typedef long syscall_arg_t;
+typedef uintptr_t size_t;
+typedef intptr_t ptrdiff_t;
 
 #undef PTR64
 #undef PTR32

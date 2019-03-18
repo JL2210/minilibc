@@ -12,5 +12,5 @@ int main(int argc, char **argv, char **envp)
 		puts(argv[a]);
 	for( a = 0; envp[a] != NULL; a++ )
 		puts(envp[a]);
-	return 16;
+	return a;
 }
