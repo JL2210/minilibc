@@ -8,5 +8,7 @@ for bits in 32 64; do
     syscall=$(cat syscall_${bits}.tbl | sed -n "/^$syscall_num	/p" | cut -f3 | sed 's,^,SYS_,g')
     sed -i "/ $syscall /s,_SYS_NUM_,$syscall_num,g" syscall_${bits}.h
   done
-  rm syscall_${bits}.tbl
+  sed 's,SYS_,__NR_,g' syscall_${bits}.h > syscall_${bits}.h.tmp
+  cat syscall_${bits}.h.tmp >> syscall_${bits}.h
+  rm -f syscall_${bits}.tbl syscall_${bits}.h.tmp
 done

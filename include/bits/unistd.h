@@ -5,6 +5,6 @@
 # error Do not include <bits/unistd.h> directly; use <unistd.h> instead.
 #endif
 
-#include <bits/syscall.h>
+#include <sys/syscall.h>
 
 #endif

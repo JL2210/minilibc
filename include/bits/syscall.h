@@ -1,7 +1,7 @@
 #ifndef _BITS_SYSCALL_H
 #define _BITS_SYSCALL_H 1
 
-#ifndef _SYS_SYCALL_H
+#ifndef _SYS_SYSCALL_H
 # error Do not include <bits/syscall.h> directly; use <sys/syscall.h> instead.
 #endif
 

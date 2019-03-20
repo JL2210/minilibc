@@ -6,7 +6,8 @@
 
 typedef void *va_list;
 #define va_start(x, y)	x=(void *)&y+1
-#define va_arg(x, y)	*(intptr_t *)&x+=sizeof(y)
+#define va_arg(x, y)	*(y*)(*(intptr_t *)&x+=sizeof(y))
+#define va_copy(x, y)	x=y;
 #define va_end(x)	x=NULL;
 
 #endif

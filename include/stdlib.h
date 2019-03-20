@@ -8,11 +8,16 @@
 
 /* Global variables */
 extern char **__environ;
-extern Elf_auxv_t *__auxv;
+extern size_t __hwcap;
+extern size_t __sysinfo;
+#define _environ __environ
+#define environ __environ
 
 /* Exit functions */
+#if 1
 extern void (*atexit_arr[])(void);
 extern uint8_t atexit_ctr;
+#endif
 extern int atexit(void (*)(void));
 extern _Noreturn void exit(int);
 extern _Noreturn void _exit(int);
@@ -27,6 +32,7 @@ extern intptr_t syscall(intptr_t, ...);
 
 /* Program startup */
 extern void _start(void);
+extern void _start_c(intptr_t *);
 extern void _init(void);
 extern void _fini(void);
 extern int __libc_start_main
