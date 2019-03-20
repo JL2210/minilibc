@@ -17,6 +17,6 @@ struct
 extern int puts(char *);
 extern int putchar(int);
 extern int printf(char *, ...);
-extern int write(int, char *, int);
+extern ssize_t write(int, char *, int);
 
 #endif
