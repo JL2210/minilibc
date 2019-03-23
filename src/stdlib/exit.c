@@ -1,4 +1,12 @@
 #include <stdlib.h>
+#include <unistd.h>
+
+#if 1
+extern void (*atexit_arr[])(void);
+#else
+extern void (**atexit_arr)(void);
+#endif
+extern uint8_t atexit_ctr;
 
 _Noreturn void exit(int ret)
 {

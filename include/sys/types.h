@@ -44,6 +44,8 @@ typedef uint16_t uintptr_t;
 
 typedef uintptr_t size_t;
 typedef intptr_t ssize_t;
+typedef ssize_t blkcnt_t;
+typedef ssize_t off_t;
 typedef int ptrdiff_t;
 
 #undef PTR64

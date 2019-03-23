@@ -1,10 +1,10 @@
 #!/bin/bash
 
-bits=32
+bits=64
 
 wget https://raw.githubusercontent.com/torvalds/linux/master/arch/x86/entry/syscalls/syscall_${bits}.tbl
 mv syscall_${bits}.tbl syscall_${bits}.tbl.orig
-sed -e '/^#/d' -e '/^$/d' syscall_${bits}.tbl.orig > syscall_${bits}.tbl
+sed -e '/^#/d' -e '/^$/d' -e '/x32/d' syscall_${bits}.tbl.orig > syscall_${bits}.tbl
 cat syscall_${bits}.tbl | cut -f3 | sed 's,^,SYS_,g' | sed 's,^,#define ,g' | sed 's,$, _SYS_NUM_,g' > syscall_${bits}.h
 for syscall_num in $(cat syscall_${bits}.tbl | cut -f1); do
   syscall=$(cat syscall_${bits}.tbl | sed -n "/^$syscall_num	/p" | cut -f3 | sed 's,^,SYS_,g')
@@ -12,9 +12,5 @@ for syscall_num in $(cat syscall_${bits}.tbl | cut -f1); do
 done
 sed 's,SYS_,__NR_,g' syscall_${bits}.h > syscall_${bits}.h.tmp
 cat syscall_${bits}.h.tmp >> syscall_${bits}.h
-cat << "_EOF_" >> syscall_${bits}.h
-#undef SYS_mmap
-#define SYS_mmap SYS_mmap2
-_EOF_
-$(echo $0 | sed 's,86,&_64,')
+$(echo $0 | sed 's,86_64,32,') syscall_${bits}.tbl.orig
 rm -f syscall_${bits}.tbl{,.orig} syscall_${bits}.h.tmp

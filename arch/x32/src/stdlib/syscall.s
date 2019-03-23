@@ -8,7 +8,7 @@ syscall:
 	mov %rcx, %rdx
 	mov %r8, %r10
 	mov %r9, %r8
-	mov 8(%rsp), %r9
+	mov 8(%esp), %r9
 	syscall
 	cmp $-0x0fff, %rax
 	jae 0f

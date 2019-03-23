@@ -3,6 +3,9 @@
 
 #include <stddef.h>
 
-size_t strlen(char *);
+extern size_t strlen(char *);
+extern char *strcpy(char *, char *);
+extern char *strncpy(char *, char *, size_t);
+extern void *memset(void *, int, size_t);
 
 #endif

@@ -3,7 +3,7 @@
 
 int puts(char *str)
 {
-	int len = strlen(str);
+	size_t len = strlen(str);
 	write(1, str, len);
 	putchar('\n');
 	return len + 1;

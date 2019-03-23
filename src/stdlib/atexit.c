@@ -1,4 +1,6 @@
+#if 0
 #include <stdlib.h>
+#endif
 #include <stddef.h>
 #include <limits.h>
 
@@ -12,9 +14,11 @@ uint8_t atexit_ctr = 0;
 int atexit(void (*func)(void))
 {
 #if 0
-	atexit_arr = (void **)realloc(atexit_arr, (atexit_ctr+1)*sizeof(void **));
+	atexit_arr = (void **)realloc(atexit_arr, (++atexit_ctr)*sizeof(void **));
 #endif
 	atexit_arr[atexit_ctr] = func;
+#if 1
 	atexit_ctr++;
+#endif
 	return 0;
 }

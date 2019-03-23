@@ -4,19 +4,32 @@
 #include <stddef.h>
 #include <stdarg.h>
 
-struct
+struct _FILE
 {
 	int fd;
-	void *ptr;
-} FILE;
+};
+
+typedef struct _FILE FILE;
 
 #ifndef EOF
 # define EOF -1
 #endif
 
+#if 1
+extern FILE stdin[];
+extern FILE stdout[];
+extern FILE stderr[];
+#else
+extern FILE *stdin;
+extern FILE *stdout;
+extern FILE *stderr;
+#endif
+
 extern int puts(char *);
 extern int putchar(int);
 extern int printf(char *, ...);
-extern ssize_t write(int, char *, int);
+extern int vprintf(char *str, va_list ap);
+extern int vfprintf(FILE *fp, char *fmt, va_list ap);
+extern ssize_t write(int, void *, int);
 
 #endif

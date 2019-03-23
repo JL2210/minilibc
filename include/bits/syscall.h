@@ -7,6 +7,8 @@
 
 #if defined(__LP64__)
 # include <bits/syscall_64.h>
+#elif defined(__ILP32__)
+# include <bits/syscall_x32.h>
 #else
 # include <bits/syscall_32.h>
 #endif
