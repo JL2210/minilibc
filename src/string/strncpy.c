@@ -2,13 +2,10 @@
 
 char *strncpy(char *dest, char *src, size_t len)
 {
-	size_t ctr = 0;
+	size_t ctr;
 
-	while(ctr < len)
-	{
+	for( ctr = 0; ctr < len; ctr++ )
 		dest[ctr] = src[ctr];
-		ctr++;
-	}
 
 	return dest;
 }

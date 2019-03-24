@@ -30,6 +30,5 @@ extern int putchar(int);
 extern int printf(char *, ...);
 extern int vprintf(char *str, va_list ap);
 extern int vfprintf(FILE *fp, char *fmt, va_list ap);
-extern ssize_t write(int, void *, int);
 
 #endif

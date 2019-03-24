@@ -2,9 +2,9 @@
 
 size_t strlen(char *str)
 {
-	size_t ctr = 0;
+	size_t ctr;
 
-	while(str[ctr]) ctr++;
+	for( ctr = 0; str[ctr]; ctr++ );
 
 	return ctr;
 }

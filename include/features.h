@@ -10,6 +10,8 @@
 # if defined(__STDC_VERSION__) && __STDC_VERSION__ < 201112L
 #  define _Noreturn __attribute__((__noreturn__))
 # endif
+#elif defined(__STDC_VERSION__) && __STDC_VERSION__ < 201112L
+# define _Noreturn
 #endif
 
 #endif

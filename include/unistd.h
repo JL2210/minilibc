@@ -12,5 +12,6 @@ extern intptr_t syscall(intptr_t, ...);
 
 extern void *sbrk(intptr_t);
 extern intptr_t brk(void *);
+extern ssize_t write(int, void *, int);
 
 #endif

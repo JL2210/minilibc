@@ -2,13 +2,10 @@
 
 void *memset(void *ptr, int value, size_t num)
 {
-	size_t ctr = 0;
+	size_t ctr;
 
-	while(ctr < num)
-	{
+	for( ctr = 0; ctr < num; ctr++ )
 		((char *)ptr)[ctr] = value;
-		ctr++;
-	}
 
 	return ptr;
 }
