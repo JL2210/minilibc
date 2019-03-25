@@ -4,7 +4,8 @@
 #include <sys/types.h>
 #include <bits/unistd.h>
 
-extern char **__environ;
+#define environ __environ
+extern char **environ;
 
 extern _Noreturn void _exit(int);
 

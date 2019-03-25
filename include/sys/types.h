@@ -3,7 +3,7 @@
 
 #include <features.h>
 
-#if UINTPTR_MAX == 0xffffffffffffffffUL || defined(__LP64__)
+#if UINTPTR_MAX == 0xffffffffffffffffUL || defined(__LP64__) || defined(__LLP64__)
 # define PTR64
 #elif UINTPTR_MAX == 0xffffffffUL || defined(__ILP32__)
 # define PTR32

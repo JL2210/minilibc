@@ -8,7 +8,8 @@
 /* Exit functions */
 extern int atexit(void (*)(void));
 extern _Noreturn void exit(int);
-extern _Noreturn void _Exit(int);
+extern _Noreturn void _exit(int);
+#define _Exit(ret) _exit(ret)
 
 /* Memory allocation */
 extern void *calloc(size_t, size_t);
