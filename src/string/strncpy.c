@@ -1,6 +1,6 @@
 #include <string.h>
 
-char *strncpy(char *dest, char *src, size_t len)
+char *strncpy(char *dest, const char *src, size_t len)
 {
 	size_t ctr;
 

@@ -3,10 +3,18 @@
 
 #include <stddef.h>
 
-extern size_t strlen(char *);
-extern char *strcpy(char *, char *);
-extern char *strncpy(char *, char *, size_t);
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+extern size_t strlen(const char *);
+extern char *strcpy(char *, const char *);
+extern char *strncpy(char *, const char *, size_t);
 extern void *memset(void *, int, size_t);
-extern void *memcpy(void *, void *, size_t);
+extern void *memcpy(void *, const void *, size_t);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int vfprintf(FILE *fp, char *fmt, va_list ap)
+int vfprintf(FILE *fp, const char *fmt, va_list ap)
 {
 	(void)fp;
 	(void)fmt;

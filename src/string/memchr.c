@@ -1,6 +1,6 @@
 #include <string.h>
 
-void *memchr(void *ptr, int c, size_t len)
+void *memchr(const void *ptr, int c, size_t len)
 {
 	size_t ctr;
 

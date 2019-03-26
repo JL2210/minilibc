@@ -3,6 +3,14 @@
 
 #include <stddef.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef size_t socklen_t;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

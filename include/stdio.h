@@ -4,6 +4,10 @@
 #include <stddef.h>
 #include <stdarg.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct _FILE
 {
 	int fd;
@@ -25,10 +29,14 @@ extern FILE *stdout;
 extern FILE *stderr;
 #endif
 
-extern int puts(char *);
+extern int puts(const char *);
 extern int putchar(int);
-extern int printf(char *, ...);
-extern int vprintf(char *str, va_list ap);
-extern int vfprintf(FILE *fp, char *fmt, va_list ap);
+extern int printf(const char *, ...);
+extern int vprintf(const char *, va_list);
+extern int vfprintf(FILE *, const char *, va_list);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -13,4 +13,11 @@
 # include <bits/syscall_32.h>
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+#ifdef __cplusplus
+}
+#endif
+
 #endif

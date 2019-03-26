@@ -1,9 +1,10 @@
+#include <stdnoreturn.h>
 #include <stdlib.h>
 #include <elf.h>
 
 #include "_start.h"
 
-extern int __libc_start_main
+extern _Noreturn int __libc_start_main
 (
 int (*)(int, char**, char**, Elf_auxv_t*),
 int,

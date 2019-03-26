@@ -3,8 +3,20 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #ifndef NULL
-# define NULL ((void *)0)
+# ifndef __cplusplus
+#  define NULL ((void *)0)
+# else
+#  define NULL 0
+# endif
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif

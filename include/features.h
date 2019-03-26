@@ -1,6 +1,10 @@
 #ifndef _FEATURES_H
 #define _FEATURES_H 1
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #if !defined(__GNUC__) && !defined(__TINYC__)
 # define __attribute__(x)
 #endif
@@ -19,8 +23,16 @@
 #ifdef __SIZE_TYPE__
 # define SIZE_TYPE __SIZE_TYPE__
 #endif
-#if defined(__STDC_VERSION__) && __STDC_VERSION__ < 201112L
+#if defined(__STDC_VERSION__)
+# if __STDC_VERSION__ < 201112L
+#  define _Noreturn __attribute__((__noreturn__))
+# endif
+#else
 # define _Noreturn __attribute__((__noreturn__))
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif

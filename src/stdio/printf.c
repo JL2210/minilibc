@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int printf(char *fmt, ...)
+int printf(const char *fmt, ...)
 {
 	int ret;
 

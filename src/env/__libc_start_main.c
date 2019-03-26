@@ -2,11 +2,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <stdnoreturn.h>
 
 extern void _init(void);
 extern void _fini(void);
 
-int __libc_start_main
+_Noreturn int __libc_start_main
 (
 int (*main)(int, char**, char**, Elf_auxv_t*),
 int argc,

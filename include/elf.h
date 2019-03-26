@@ -3,6 +3,10 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Types */
 
 struct Elf32_auxv_t
@@ -75,5 +79,9 @@ typedef struct Elf64_auxv_t Elf64_auxv_t;
 #define AT_L2_CACHEGEOMETRY 45
 #define AT_L3_CACHESIZE 46
 #define AT_L3_CACHEGEOMETRY 47
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

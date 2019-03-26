@@ -2,7 +2,7 @@
 #include <string.h>
 #include <unistd.h>
 
-int puts(char *str)
+int puts(const char *str)
 {
 	size_t len = strlen(str);
 	write(1, str, len);

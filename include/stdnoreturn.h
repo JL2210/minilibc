@@ -3,6 +3,14 @@
 
 #include <features.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define noreturn _Noreturn
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

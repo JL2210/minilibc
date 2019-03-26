@@ -5,14 +5,22 @@
 #include <features.h>
 #include <stddef.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Exit functions */
 extern int atexit(void (*)(void));
-extern _Noreturn void exit(int);
-extern _Noreturn void _exit(int);
+extern void exit(int);
+extern void _exit(int);
 #define _Exit(ret) _exit(ret)
 
 /* Memory allocation */
 extern void *calloc(size_t, size_t);
 extern void *malloc(size_t);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
