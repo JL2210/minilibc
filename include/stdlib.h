@@ -11,8 +11,8 @@ extern "C" {
 
 /* Exit functions */
 extern int atexit(void (*)(void));
-extern void exit(int);
-extern void _exit(int);
+extern _Noreturn void exit(int);
+extern _Noreturn void _exit(int);
 #define _Exit(ret) _exit(ret)
 
 /* Memory allocation */

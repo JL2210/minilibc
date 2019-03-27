@@ -1,6 +1,5 @@
 .text
 .globl syscall
-.type syscall, STT_FUNC
 syscall:
 	mov %rdi, %rax
 	mov %rsi, %rdi

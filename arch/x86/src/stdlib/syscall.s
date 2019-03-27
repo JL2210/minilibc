@@ -1,6 +1,5 @@
 .text
 .globl syscall
-.type syscall, STT_FUNC
 syscall:
 	push %ebp
 	push %edi
