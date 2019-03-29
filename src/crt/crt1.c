@@ -6,11 +6,11 @@
 
 extern _Noreturn int __libc_start_main
 (
-int (*)(int, char**, char**, Elf_auxv_t*),
+int (*)(int, char**, char**),
 int,
 char **
 );
-extern int main(int, char**, char**, Elf_auxv_t*);
+extern int main(int, char**, char**);
 
 void _c_start(intptr_t *ptr)
 {
