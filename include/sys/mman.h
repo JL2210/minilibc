@@ -7,7 +7,13 @@
 extern "C" {
 #endif
 
-extern void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset);
+#define PROT_NONE	0
+#define PROT_READ	1
+#define PROT_WRITE	(1<<1)
+#define PROT_EXEC	(1<<2)
+
+extern void *mmap(void *, size_t, int, int, int, off_t);
+extern int munmap(void *, size_t);
 
 #ifdef __cplusplus
 }
