@@ -3,8 +3,6 @@
 
 int brk(void *ptr)
 {
-	int ret;
-
 	if( (void *)syscall(SYS_brk, ptr) != ptr )
 		return -1;
 	else

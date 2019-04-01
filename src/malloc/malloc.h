@@ -4,7 +4,11 @@
 #include <features.h>
 #include <sys/types.h>
 
-#define CHUNK_SIZE (8192) /* 8K */
+#ifdef __PTR16__
+# define CHUNK_SIZE (0x4000) /* 16K */
+#else
+# define CHUNK_SIZE (0x10000) /* 64K */
+#endif
 
 struct malloc_chunk
 {
