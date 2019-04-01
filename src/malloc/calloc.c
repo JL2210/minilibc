@@ -3,7 +3,6 @@
 
 void *calloc(size_t nmemb, size_t size)
 {
-	(void)nmemb;
-	(void)size;
-	return NULL;
+	while( (size % 4) != 0 ) size++;
+	return malloc(nmemb * size);
 }

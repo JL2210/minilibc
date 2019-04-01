@@ -23,6 +23,15 @@ extern "C" {
 #ifdef __SIZE_TYPE__
 # define SIZE_TYPE __SIZE_TYPE__
 #endif
+
+#if UINTPTR_MAX == 0xffffffffffffffffUL || defined(__LP64__) || defined(__LLP64__)
+# define __PTR64__
+#elif UINTPTR_MAX == 0xffffffffUL || defined(__ILP32__)
+# define __PTR32__
+#elif UINTPTR_MAX == 0xffffUL
+# define __PTR16__
+#endif
+
 #if defined(__STDC_VERSION__)
 # if __STDC_VERSION__ < 201112L
 #  define _Noreturn __attribute__((__noreturn__))

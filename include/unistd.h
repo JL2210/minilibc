@@ -16,7 +16,7 @@ extern _Noreturn void _exit(int);
 extern intptr_t syscall(intptr_t, ...);
 
 extern void *sbrk(intptr_t);
-extern intptr_t brk(void *);
+extern int brk(void *);
 extern ssize_t write(int, const void *, int);
 
 #ifdef __cplusplus

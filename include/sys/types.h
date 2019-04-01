@@ -7,14 +7,6 @@
 extern "C" {
 #endif
 
-#if UINTPTR_MAX == 0xffffffffffffffffUL || defined(__LP64__) || defined(__LLP64__)
-# define __PTR64__
-#elif UINTPTR_MAX == 0xffffffffUL || defined(__ILP32__)
-# define __PTR32__
-#elif UINTPTR_MAX == 0xffffUL
-# define __PTR16__
-#endif
-
 typedef char int8_t;
 typedef short int16_t;
 #ifndef __PTR16__
@@ -51,10 +43,6 @@ typedef intptr_t ssize_t;
 typedef ssize_t blkcnt_t;
 typedef ssize_t off_t;
 typedef int ptrdiff_t;
-
-#undef __PTR64__
-#undef __PTR32__
-#undef __PTR16__
 
 #ifdef __cplusplus
 }
