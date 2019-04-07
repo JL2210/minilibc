@@ -1,4 +1,4 @@
 void __main(void)
 {
-	;
+    ;
 }

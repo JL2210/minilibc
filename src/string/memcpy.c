@@ -2,10 +2,10 @@
 
 void *memcpy(void *dest, const void *src, size_t num)
 {
-	size_t ctr;
+    size_t ctr;
 
-	for( ctr = 0; ctr < num; ctr++ )
-		((char *)dest)[ctr] = ((char *)src)[ctr];
+    for( ctr = 0; ctr < num; ctr++ )
+        ((char *)dest)[ctr] = ((char *)src)[ctr];
 
-	return dest;
+    return dest;
 }

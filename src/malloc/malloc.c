@@ -5,12 +5,6 @@
 
 void *malloc(size_t size)
 {
-	if(!size)
-		return sbrk(0);
-
-	if(!__mallchunk)
-		__get_next_chunk();
-
-	__get_next_allocation(size);
-	return __allocinfo->start;
+    __get_next_allocation(size);
+    return __allocinfo->start;
 }

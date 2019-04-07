@@ -12,20 +12,20 @@
 
 struct malloc_chunk
 {
-	void *start;
-	size_t alloc_cnt;
-	size_t chunk_cnt;
-	struct malloc_chunk *prev;
-	struct malloc_chunk *next;
+    void *start;
+    size_t alloc_cnt;
+    size_t chunk_cnt;
+    struct malloc_chunk *prev;
+    struct malloc_chunk *next;
 };
 
 struct allocation_info
 {
-	void *start;
-	size_t size;
-	int free;
-	struct allocation_info *prev;
-	struct allocation_info *next;
+    void *start;
+    size_t size;
+    int free;
+    struct allocation_info *prev;
+    struct allocation_info *next;
 };
 
 extern struct malloc_chunk *__mallchunk;

@@ -10,7 +10,7 @@ extern "C" {
 
 struct _FILE
 {
-	int fd;
+    int fd;
 };
 
 typedef struct _FILE FILE;

@@ -2,11 +2,11 @@
 
 int printf(const char *fmt, ...)
 {
-	int ret;
+    int ret = 0;
 
-	va_list ap;
-	va_start(ap, fmt);
-	ret = vprintf(fmt, ap);
-	va_end(ap);
-	return ret;
+    va_list ap = NULL;
+    va_start(ap, fmt);
+    ret = vprintf(fmt, ap);
+    va_end(ap);
+    return ret;
 }

@@ -11,22 +11,22 @@ extern "C" {
 
 struct Elf32_auxv_t
 {
-	uint32_t a_type;
-	union
-	{
-		uint32_t a_val;
-  	} a_un;
+    uint32_t a_type;
+    union
+    {
+        uint32_t a_val;
+    } a_un;
 };
 typedef struct Elf32_auxv_t Elf32_auxv_t;
 
 #ifndef __PTR16__
 struct Elf64_auxv_t
 {
-	uint64_t a_type;
-	union
-	{
-		uint64_t a_val;
-	} a_un;
+    uint64_t a_type;
+    union
+    {
+        uint64_t a_val;
+    } a_un;
 };
 typedef struct Elf64_auxv_t Elf64_auxv_t;
 #endif
@@ -64,7 +64,7 @@ typedef struct Elf64_auxv_t Elf64_auxv_t;
 #define AT_BASE_PLATFORM 24
 #define AT_RANDOM 25
 #define AT_HWCAP2 26
-/* 27-30 missing? */
+
 #define AT_EXECFN 31
 #define AT_SYSINFO 32
 #define AT_SYSINFO_EHDR 33
@@ -72,7 +72,7 @@ typedef struct Elf64_auxv_t Elf64_auxv_t;
 #define AT_L1D_CACHESHAPE 35
 #define AT_L2_CACHESHAPE 36
 #define AT_L3_CACHESHAPE 37
-/* 38,39? */
+
 #define AT_L1I_CACHESIZE 40
 #define AT_L1I_CACHEGEOMETRY 41
 #define AT_L1D_CACHESIZE 42

@@ -18,6 +18,7 @@ extern _Noreturn void _exit(int);
 /* Memory allocation */
 extern void *calloc(size_t, size_t);
 extern void *malloc(size_t);
+extern void free(void *ptr);
 
 #ifdef __cplusplus
 }

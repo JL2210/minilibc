@@ -5,13 +5,13 @@
 
 int main(int argc, char **argv, char **envp)
 {
-	int a;
+    int a = 0;
 
-	(void)argc;
-	(void)argv;
+    (void)argc;
+    (void)argv;
 
-	for( a = 0; envp[a] != NULL; a++ )
-		puts(envp[a]);
+    for( a = 0; envp[a] != NULL; a++ )
+        puts(envp[a]);
 
-	return 0;
+    return 0;
 }

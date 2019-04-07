@@ -2,5 +2,5 @@
 
 int vprintf(const char *fmt, va_list ap)
 {
-	return vfprintf(stdin, fmt, ap);
+    return vfprintf(stdin, fmt, ap);
 }
