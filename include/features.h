@@ -28,7 +28,7 @@ extern "C" {
 # define __PTR64__
 #elif UINTPTR_MAX == 0xffffffffUL || defined(__ILP32__)
 # define __PTR32__
-#elif UINTPTR_MAX == 0xffffUL
+#elif UINTPTR_MAX == 0xffffU
 # define __PTR16__
 #endif
 

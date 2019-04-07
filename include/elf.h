@@ -19,6 +19,7 @@ struct Elf32_auxv_t
 };
 typedef struct Elf32_auxv_t Elf32_auxv_t;
 
+#ifndef __PTR16__
 struct Elf64_auxv_t
 {
 	uint64_t a_type;
@@ -28,6 +29,7 @@ struct Elf64_auxv_t
 	} a_un;
 };
 typedef struct Elf64_auxv_t Elf64_auxv_t;
+#endif
 
 #ifdef __LP64__
 # define Elf_auxv_t Elf64_auxv_t
