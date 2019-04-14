@@ -10,38 +10,72 @@ extern int main(int argc, char **argv);
 void _start(void)
 {
 	asm volatile (
-		"\tmov $0x07e0, %ax\n"
-		"\tmov %ax, %ss\n"
-		"\tmov $-1, %sp\n"
-		"\tpush %cs\n"
-		"\tpop %ds\n"
+		"\tmov %%cs, %%ax\n"
+		"\tmov %%ax, %%ds\n"
+		"\tmov %%ax, %%es\n"
+		: : : "%ax"
 	);
-	char *ss = (void *)0x7e00, *new_ss, **argv;
+	void *ptr = NULL;
+	char **argv, *args, *orig_args;
 	char msg[] = "Enter argument list: ";
-	unsigned int argc = 2, ret, ctr[2], len;
+	unsigned int argc = 2, ret, ctr[2], len, offset[2];
 	bios_clear();
 	bios_setcursor(0);
-	bios_write((int16_t)(int32_t)msg, sizeof(msg));
-	gets(ss);
-	len = strlen(ss);
+	puts(msg);
+	asm (
+		"\tsub $0x0400, %%sp\n"
+		"\tpush %%sp\n"
+		"\tcall gets\n"
+		"\tmov %%esp, %0\n"
+		: "=r" (args)
+		: : "cc"
+		);
+	orig_args = args;
+	len = strlen(args);
 	len++;
-	new_ss = ss + len;
-	argv = (void *)new_ss;
-	for( ctr[0] = 0; ctr[0] < len; ctr[0]++ )
-		if( ss[ctr[0]] == ' ' ) argc++;
-	new_ss += sizeof(argv) * argc;
-	for( ctr[0] = 0; ctr[0] < argc; ctr[0]++ )
+	for( ctr[0] = 0, ctr[1] = 1; ctr[0] < len; ctr[0]++ )
 	{
-		argv[ctr[0]] = new_ss;
-		for( ctr[1] = 0; (ss[ctr[1]] != ' ') && (ss[ctr[1]] != '\0'); ctr[1]++ )
-			argv[ctr[0]][ctr[1]] = ss[ctr[1]];
-		argv[ctr[0]][ctr[1]] = '\0';
-		new_ss += strlen(argv[ctr[0]]);
+		if( args[ctr[0]] == ' ' )
+		{
+			ctr[1]++;
+			args[ctr[0]] = '\0';
+		}
 	}
-	memset(ss, 0, len);
+	asm (
+		"\tsub %1, %%esp\n"
+		"\tmov %%esp, %0\n"
+		: "=r" (argv)
+		: "r" (ctr[1]*sizeof(char *))
+		: "cc"
+		);
+	argv[0] = NULL;
+	asm (
+		"\tsub %1, %%esp\n"
+		"\tmov %%esp, %0\n"
+		: "=r" (ptr)
+		: "r" (len)
+		: "cc"
+		);
+	for( ctr[0] = 0; ctr[0] < 2; ctr[0]++ )
+		offset[ctr[0]] = 0;
+	for( ctr[0] = 1; ctr[0] < ctr[1] && args && offset[1] <= len; ctr[0]++, offset[0]++ )
+	{
+		argv[ctr[0]] = ptr;
+		strcpy(argv[ctr[0]], args);
+		offset[0] = (strchr(args, 0) - args) + 1;
+		offset[1] = (offset[0] + args) - orig_args;
+		args += offset[0];
+		ptr += offset[0];
+	}
 	_init();
 	ret = main(argc, argv);
 	_fini();
+
+	asm (
+		"\tadd %0, %%esp\n"
+		: : "r" (len+(ctr[1]*sizeof(char *))+0x0400)
+		: "cc"
+		);
 
 	exit(ret);
 }

@@ -18,17 +18,17 @@ extern "C" {
 #ifdef __UINTPTR_MAX__
 # define UINTPTR_MAX __UINTPTR_MAX__
 #endif
+#ifdef __SIZE_MAX__
+# define SIZE_MAX __SIZE_MAX__
+#endif
 #ifdef __INTPTR_MAX__
 # define INTPTR_MAX __INTPTR_MAX__
 # define SSIZE_MAX INTPTR_MAX
 #endif
-#ifdef __SIZE_TYPE__
-# define SIZE_TYPE __SIZE_TYPE__
-#endif
 
-#if UINTPTR_MAX == 0xffffffffffffffffUL || defined(__LP64__) || defined(__LLP64__)
+#if UINTPTR_MAX == 0xffffffffffffffffUL
 # define __PTR64__
-#elif UINTPTR_MAX == 0xffffffffUL || defined(__ILP32__)
+#elif UINTPTR_MAX == 0xffffffffUL
 # define __PTR32__
 #elif UINTPTR_MAX == 0xffffU
 # define __PTR16__

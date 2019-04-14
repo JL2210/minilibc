@@ -4,6 +4,8 @@
 
 #include "_start.h"
 
+#ifndef NEWBOOT_H
+
 extern _Noreturn int __libc_start_main
 (
 int (*)(int, char**, char**),
@@ -19,3 +21,5 @@ void _c_start(intptr_t *ptr)
 
     __libc_start_main(main, argc, argv);
 }
+
+#endif
