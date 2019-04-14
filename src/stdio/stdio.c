@@ -1,5 +1,10 @@
 #include <stdio.h>
+#include <unistd.h>
 
-FILE stdin[1] = {{0}};
-FILE stdout[1] = {{1}};
-FILE stderr[1] = {{2}};
+FILE __stdin = { STDIN_FILENO };
+FILE __stdout = { STDOUT_FILENO };
+FILE __stderr = { STDERR_FILENO };
+
+FILE *stdin = &__stdin;
+FILE *stdout = &__stdout;
+FILE *stderr = &__stderr;

@@ -11,7 +11,7 @@ extern "C" {
 #define va_alist int _va_alist, ...
 #define va_dcl
 #define va_start(p) va_start(p, _va_alist)
-#error <varargs.h> is deprecated. Use <stdarg.h> instead.
+#warning <varargs.h> is deprecated. Use <stdarg.h> instead.
 
 #ifdef __cplusplus
 }

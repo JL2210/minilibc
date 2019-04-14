@@ -3,7 +3,6 @@
 
 /* Needed header files */
 #include <features.h>
-#include <stddef.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -16,6 +15,7 @@ extern _Noreturn void _exit(int);
 #define _Exit(ret) _exit(ret)
 
 /* Memory allocation */
+extern void *realloc(void *ptr, size_t size);
 extern void *calloc(size_t, size_t);
 extern void *malloc(size_t);
 extern void free(void *ptr);

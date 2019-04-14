@@ -1,21 +1,13 @@
-#if 0
 #include <stdlib.h>
-#endif
-#include <stddef.h>
+#include <stdint.h>
 #include <limits.h>
 
-#if 1
-void (*atexit_arr[ATEXIT_MAX])(void) = { NULL };
-#else
-void (**atexit_arr)(void) = { NULL };
-#endif
-uint8_t atexit_ctr = 0;
+void (**__atexit_arr)(void) = NULL;
+uint8_t __atexit_ctr = 0;
 
 int atexit(void (*func)(void))
 {
-#if 0
-    atexit_arr = (void **)realloc(atexit_arr, (atexit_ctr)*sizeof(void **));
-#endif
-    atexit_arr[atexit_ctr++] = func;
+    __atexit_arr = realloc(__atexit_arr, __atexit_ctr*sizeof(*__atexit_arr));
+    __atexit_arr[__atexit_ctr++] = func;
     return 0;
 }

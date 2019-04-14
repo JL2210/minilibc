@@ -1,6 +1,8 @@
 #ifndef _FEATURES_H
 #define _FEATURES_H 1
 
+#include <stddef.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif

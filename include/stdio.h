@@ -1,7 +1,7 @@
 #ifndef _STDIO_H
 #define _STDIO_H 1
 
-#include <stddef.h>
+#include <features.h>
 #include <stdarg.h>
 
 #ifdef __cplusplus
@@ -19,21 +19,23 @@ typedef struct _FILE FILE;
 # define EOF -1
 #endif
 
-#if 1
-extern FILE stdin[];
-extern FILE stdout[];
-extern FILE stderr[];
-#else
 extern FILE *stdin;
 extern FILE *stdout;
 extern FILE *stderr;
-#endif
 
 extern int puts(const char *);
+extern int fputs(const char *str, FILE *stream);
 extern int putchar(int);
 extern int printf(const char *, ...);
 extern int vprintf(const char *, va_list);
 extern int vfprintf(FILE *, const char *, va_list);
+extern char *fgets(char *, int, FILE *);
+#if __STDC_VERSION__ < 201112L
+extern char *gets(char *str);
+#endif
+extern int fgetc(FILE *);
+extern int getchar(void);
+#define getc fgetc
 
 #ifdef __cplusplus
 }

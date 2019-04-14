@@ -7,7 +7,9 @@
 extern "C" {
 #endif
 
-#define noreturn _Noreturn
+#ifndef __cplusplus
+# define noreturn _Noreturn
+#endif
 
 #ifdef __cplusplus
 }

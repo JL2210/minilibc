@@ -1,5 +1,5 @@
 #include <unistd.h>
 #include <stddef.h>
 
-char **__environ = NULL;
+char **environ = NULL;
 
