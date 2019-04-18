@@ -24,7 +24,7 @@ extern intptr_t syscall(intptr_t, ...);
 extern void *sbrk(intptr_t);
 extern int brk(void *);
 extern ssize_t write(int, const void *, size_t);
-extern ssize_t read(int, const void *, size_t);
+extern ssize_t read(int, void *, size_t);
 
 #ifdef __cplusplus
 }

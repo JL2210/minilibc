@@ -4,6 +4,6 @@
 int fgetc(FILE *stream)
 {
     int ret = 0;
-    read(stream->fd, &ret, sizeof(char));
+    read(fileno(stream), &ret, sizeof(char));
     return ret;
 }

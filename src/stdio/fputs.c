@@ -5,6 +5,6 @@
 int fputs(const char *str, FILE *stream)
 {
     size_t len = strlen(str);
-    write(stream->fd, str, len);
+    write(fileno(stream), str, len);
     return len;
 }

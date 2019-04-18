@@ -1,5 +1,5 @@
 #include <unistd.h>
-#include <stdnoreturn.h>
+#include <sys/syscall.h>
 
 _Noreturn void _exit(int ret)
 {

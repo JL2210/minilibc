@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <sys/syscall.h>
 
 int open(const char *path, int oflag, ...)
 {

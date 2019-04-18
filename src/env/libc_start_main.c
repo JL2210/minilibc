@@ -19,15 +19,15 @@ char **argv
     int ret;
     Elf_auxv_t *auxv;
 
-    __environ = argv + argc + 1;
-    for( ret = 0; __environ[ret]; ret++ );
-    auxv = (Elf_auxv_t *)__environ + ret + 1;
+    environ = argv + argc + 1;
+    for( ret = 0; environ[ret]; ret++ );
+    auxv = (void *)environ + ret + 1;
     size_t aux[AUX_NUM];
     for( ret = 0; ret < AUX_NUM; ret++ )
         aux[ret] = auxv[ret].a_un.a_val;
 
     _init();
-    ret = main(argc, argv, __environ, aux);
+    ret = main(argc, argv, environ, aux);
     _fini();
 
     exit(ret);

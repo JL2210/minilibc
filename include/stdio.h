@@ -36,6 +36,7 @@ extern char *gets(char *str);
 extern int fgetc(FILE *);
 extern int getchar(void);
 #define getc fgetc
+extern int fileno(FILE *fp);
 
 #ifdef __cplusplus
 }

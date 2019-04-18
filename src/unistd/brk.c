@@ -1,5 +1,5 @@
-#include <stdint.h>
 #include <unistd.h>
+#include <sys/syscall.h>
 
 int brk(void *ptr)
 {

@@ -8,12 +8,12 @@ int main(int argc, char **argv)
     size_t *len = NULL;
     int ctr = 0;
     char **buf = NULL;
-    len = (size_t *)calloc(argc, sizeof(size_t));
-    buf = (char **)calloc(argc, sizeof(char *));
+    len = calloc(argc, sizeof(size_t));
+    buf = calloc(argc, sizeof(char *));
     while( ctr < argc )
     {
         len[ctr] = strlen(argv[ctr]) + 1;
-        buf[ctr] = (char *)malloc(len[ctr]);
+        buf[ctr] = malloc(len[ctr]);
         if( buf[ctr] == NULL )
         {
             puts("Error: Unable to allocate memory");

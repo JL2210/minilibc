@@ -3,6 +3,6 @@
 
 char *fgets(char *str, int len, FILE *stream)
 {
-    read(stream->fd, str, len);
+    read(fileno(stream), str, len);
     return str;
 }

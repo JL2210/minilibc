@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdint.h>
 #include <unistd.h>
 
 extern void (**__atexit_arr)(void);

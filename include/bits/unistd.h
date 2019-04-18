@@ -5,8 +5,6 @@
 # error Do not include <bits/unistd.h> directly; use <unistd.h> instead.
 #endif
 
-#include <sys/syscall.h>
-
 #ifdef __cplusplus
 extern "C" {
 #endif
