@@ -12,13 +12,12 @@ int vfprintf(FILE *fp, const char *fmt, va_list ap)
         do {
             putchar(fmt[ctr++]);
             num++;
-        } while(fmt[ctr] != '%' && fmt[ctr] != 0);
-        switch(fmt[++ctr])
+            if(ctr >= len || fmt[ctr] == '\0')
+                return num;
+        } while(fmt[ctr] != '%');
+	if(++ctr >= len) return ++num;
+        switch(fmt[ctr])
         {
-            case '%':
-                fputc(fmt[ctr], fp);
-                num++;
-                break;
             case 'c':
                 fputc(va_arg(ap, int), fp);
                 num++;
@@ -27,7 +26,10 @@ int vfprintf(FILE *fp, const char *fmt, va_list ap)
                 str = va_arg(ap, char *);
                 num += fputs(str, fp);
                 break;
+            case '%':
             default:
+                fputc(fmt[ctr], fp);
+                num++;
                 break;
         }
     }

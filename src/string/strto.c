@@ -1,56 +1,73 @@
 #include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
+#include <errno.h>
+
+#define BASE_BIN 2
+#define BASE_OCT 8
+#define BASE_DEC 10
+#define BASE_HEX 16
 
 #define IS_BETWEEN_A_AND_F(x) (between_a_and_f = (x >= 'a' && x <= 'f'))
 
-long long __strto(char *str, char **endptr, int base)
+long long __strto(const char *str, char **endptr, int base)
 {
-	int c;
-        size_t len, ctr;
-        long long power = 1, ret = 0;
-        bool is_negative = 0, between_a_and_f;
+    int c;
+    long long len,
+              ctr,
+              ret = 0,
+              power = 1;
+    bool is_negative = false,
+         between_a_and_f;
 
-        while(isspace(*str)) str++;
+    if(!str) goto invalid;
 
-	len = strlen(str);
+    while(isspace(*str)) str++;
+    if(*str == '-')
+    {
+        is_negative = true;
+        str++;
+    }
 
-        for(ctr = 0; ctr < len; ctr++, power *= base)
+    len = strlen(str);
+    if(!len)
+        goto invalid;
+
+    for(ctr = len - 1; ctr >= 0; ctr--, power *= base)
+    {
+        if(!IS_BETWEEN_A_AND_F(str[ctr]) && !isdigit(str[ctr]))
         {
-                if(!IS_BETWEEN_A_AND_F(str[ctr]) && !isdigit(str[ctr]))
-		{
-			if(endptr) *endptr = &str[ctr];
-			break;
-		}
-                if(str[ctr] == '-')
-                {
-                        is_negative = 1;
-                        continue;
-                }
-                if(!between_a_and_f) c = '0';
-		else c = 'a' - 10;
-                ret += (str[ctr] - c) * power;
+            if(endptr) *(const char **)endptr = str + ctr;
+            break;
         }
+        if(!between_a_and_f) c = '0';
+        else if(base != 16) goto invalid;
+        else c = 'a' - 10;
+        ret += (str[ctr] - c) * power;
+    }
 
-        return is_negative ? -ret : ret;
+    return is_negative ? -ret : ret;
+invalid:
+    errno = EINVAL;
+    return 0;
 }
 
-long long strtoll(char *str, char **endptr, int base)
+long long strtoll(const char *str, char **endptr, int base)
 {
-	return (long long)__strto(str, endptr, base);
+    return (long long)__strto(str, endptr, base);
 }
 
-unsigned long long strtoull(char *str, char **endptr, int base)
+unsigned long long strtoull(const char *str, char **endptr, int base)
 {
-	return (unsigned long long)__strto(str, endptr, base);
+    return (unsigned long long)__strto(str, endptr, base);
 }
 
-long strtol(char *str, char **endptr, int base)
+long strtol(const char *str, char **endptr, int base)
 {
-	return (long)__strto(str, endptr, base);
+    return (long)__strto(str, endptr, base);
 }
 
-unsigned long strtoul(char *str, char **endptr, int base)
+unsigned long strtoul(const char *str, char **endptr, int base)
 {
-	return (unsigned long)__strto(str, endptr, base);
+    return (unsigned long)__strto(str, endptr, base);
 }

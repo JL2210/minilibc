@@ -2,5 +2,5 @@
 
 int isalpha(int c)
 {
-	return c - 'a' < 26;
+    return c - 'a' < 26;
 }
