@@ -13,5 +13,10 @@ syscall:
 	jae 0f
 	ret
 0:
-	mov $-1, %rax
+	neg %rax
+	push %rax
+	call __get_errno
+	mov %eax, %edi
+	pop %rax
+	mov %rax, (%edi)
 	ret

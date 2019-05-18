@@ -1,6 +1,7 @@
 #include "malloc.h"
 
 #include <stdlib.h>
+#include <string.h>
 
 void free(void *ptr)
 {
@@ -16,5 +17,6 @@ void free(void *ptr)
 
     if(!tmp_allinfo) return;
 
+    memset(tmp_allinfo->start, 0, tmp_allinfo->size);
     tmp_allinfo->free = 1;
 }

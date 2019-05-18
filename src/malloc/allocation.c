@@ -23,21 +23,19 @@ void __get_next_allocation(size_t size)
     while(tmp_chnk->prev != NULL)
         tmp_chnk = tmp_chnk->prev;
 
-    for( ctr = 0; ctr < tmp_chnk->alloc_cnt; ctr++ )
+    for(ctr = 0;
+        ctr < tmp_chnk->alloc_cnt && tmp_alloc;
+        ctr++, tmp_alloc = tmp_alloc->next)
     {
-       if(tmp_alloc)
-       {
-            if( tmp_alloc->free &&
-                tmp_alloc->size >= size )
-            {
-                found_allocation = 1;
-                tmp_alloc->prev->next = tmp_alloc->next;
-                tmp_alloc->next->prev = tmp_alloc->prev;
-                tmp_alloc->next = NULL;
-                break;
-            }
-        } else break;
-        tmp_alloc = tmp_alloc->next;
+        if( tmp_alloc->free &&
+            tmp_alloc->size >= size )
+        {
+            found_allocation = 1;
+            tmp_alloc->prev->next = tmp_alloc->next;
+            tmp_alloc->next->prev = tmp_alloc->prev;
+            tmp_alloc->next = NULL;
+            break;
+        }
     }
 
     if(!found_allocation)

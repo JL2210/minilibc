@@ -1,8 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-extern int __atexit_ctr;
-
 void atexit_test(void)
 {
 	puts("atexit() test...");

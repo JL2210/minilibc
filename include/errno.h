@@ -5,7 +5,9 @@
 extern "C" {
 #endif
 
-extern int errno;
+typedef int errno_t;
+
+#define errno (*__get_errno())
 
 #ifdef __cplusplus
 }
