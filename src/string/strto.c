@@ -29,6 +29,9 @@ long long __strto(const char *str, char **endptr, int base)
         str++;
     }
 
+    if(base == BASE_HEX && strncmp("0x", str, 2))
+        str += 2;
+
     len = strlen(str);
     if(!len)
         goto invalid;
@@ -41,7 +44,7 @@ long long __strto(const char *str, char **endptr, int base)
             break;
         }
         if(!between_a_and_f) c = '0';
-        else if(base != 16) goto invalid;
+        else if(base != BASE_HEX) goto invalid;
         else c = 'a' - 10;
         ret += (str[ctr] - c) * power;
     }

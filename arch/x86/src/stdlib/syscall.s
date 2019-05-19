@@ -27,4 +27,5 @@ syscall:
 	mov %eax, %edi
 	pop %eax
 	mov %eax, (%edi)
+	mov $-1, %eax
 	ret

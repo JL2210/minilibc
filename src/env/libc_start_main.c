@@ -21,7 +21,7 @@ char **argv
 
     environ = argv + argc + 1;
     for( ret = 0; environ[ret]; ret++ );
-    auxv = (void *)environ + ret + 1;
+    auxv = (Elf_auxv_t *)(environ + ret + 1);
     size_t aux[AUX_NUM];
     for( ret = 0; ret < AUX_NUM; ret++ )
         aux[ret] = auxv[ret].a_un.a_val;

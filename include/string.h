@@ -8,8 +8,10 @@ extern "C" {
 #endif
 
 extern size_t strlen(const char *);
+extern size_t strnlen(const char *, size_t);
 extern char *strcpy(char *, const char *);
-extern char *strchr(const char *s, int c);
+extern int strncmp(const char *, const char *, size_t);
+extern char *strchr(const char *, int);
 extern char *strncpy(char *, const char *, size_t);
 extern void *memset(void *, int, size_t);
 extern void *memchr(const void *ptr, int c, size_t len);

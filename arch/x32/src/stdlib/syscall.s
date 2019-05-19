@@ -19,4 +19,5 @@ syscall:
 	mov %eax, %edi
 	pop %rax
 	mov %rax, (%edi)
+	mov $-1, %rax
 	ret

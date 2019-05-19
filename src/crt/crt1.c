@@ -13,7 +13,7 @@ char **
 
 extern int main(int, char**, char**);
 
-void _c_start(intptr_t *ptr)
+_Noreturn void _c_start(intptr_t *ptr)
 {
     int argc = *ptr;
     char **argv = (char **)ptr+1;

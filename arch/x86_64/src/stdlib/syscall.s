@@ -19,4 +19,5 @@ syscall:
 	mov %rax, %rdi
 	pop %rax
 	mov %rax, (%rdi)
+	mov $-1, %rax
 	ret
