@@ -32,6 +32,7 @@ int vfprintf(FILE *fp, const char *fmt, va_list ap)
                 num++;
                 break;
         }
+        ctr++;
     }
     return num;
 }

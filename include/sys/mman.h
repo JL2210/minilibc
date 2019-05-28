@@ -2,6 +2,7 @@
 #define _SYS_MMAN_H 1
 
 #include <sys/types.h>
+#include <features.h>
 
 #ifdef __cplusplus
 extern "C" {

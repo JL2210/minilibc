@@ -10,7 +10,7 @@ int main(int argc, char **argv, char **envp)
     printf("%d\n", argc);
     for( a = 0; a < argc; a++ )
         puts(argv[a]);
-    for( a = 0; envp[a] != NULL; a++ )
+    for( a = 0; envp[a]; a++ )
         puts(envp[a]);
     return a;
 }

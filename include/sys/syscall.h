@@ -2,6 +2,7 @@
 #define _SYS_SYSCALL_H 1
 
 #include <bits/syscall.h>
+#include <features.h>
 
 #ifdef __cplusplus
 extern "C" {

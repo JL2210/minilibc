@@ -2,6 +2,7 @@
 #define _ERRNO_H 1
 
 #include <stdint.h>
+#include <features.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -19,13 +19,22 @@ long long __strto(const char *str, char **endptr, int base)
               power = 1;
     bool is_negative = false,
          between_a_and_f;
+    const char *old_str = str;
 
     if(!str) goto invalid;
+
+    len = strlen(str);
+    if(!len)
+        goto invalid;
 
     while(isspace(*str)) str++;
     if(*str == '-')
     {
         is_negative = true;
+        str++;
+    }
+    else if(*str == '+')
+    {
         str++;
     }
 
@@ -35,6 +44,11 @@ long long __strto(const char *str, char **endptr, int base)
     len = strlen(str);
     if(!len)
         goto invalid;
+
+    if(!base)
+    {
+        
+    }
 
     for(ctr = len - 1; ctr >= 0; ctr--, power *= base)
     {
