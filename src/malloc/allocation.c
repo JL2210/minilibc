@@ -1,10 +1,29 @@
+/*
+ *  Copyright (C) 2019 James Larrowe
+ *
+ *  This file is part of Minilibc.
+ *
+ *  Minilibc is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Lesser General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  Minilibc is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with Minilibc.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include <unistd.h>
 #include <stddef.h>
 #include <sys/mman.h>
 
 #include "malloc.h"
 
-void __get_next_allocation(size_t size)
+int __get_next_allocation(size_t size)
 {
     size_t ctr = 0;
     int found_allocation = 0;
@@ -12,7 +31,8 @@ void __get_next_allocation(size_t size)
     struct malloc_chunk *tmp_chnk = NULL;
 
     if(!__mallchunk)
-        __get_next_chunk();
+        if(__get_next_chunk())
+            return -1;
 
     if(!__allocinfo)
         __allocinfo = __mallchunk->start;
@@ -43,7 +63,8 @@ void __get_next_allocation(size_t size)
         if((size_t)(__allocinfo->start - __mallchunk->start)
                 > ((CHUNK_SIZE - size) - sizeof(*tmp_alloc)))
         {
-            __get_next_chunk();
+            if(__get_next_chunk())
+                return -1;
             tmp_alloc = __mallchunk->start;
         }
         else
@@ -62,4 +83,5 @@ void __get_next_allocation(size_t size)
     __allocinfo->size = size;
     __allocinfo->free = 0;
     __mallchunk->alloc_cnt++;
+    return 0;
 }

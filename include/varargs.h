@@ -1,5 +1,26 @@
+/*
+ *  Copyright (C) 2019 James Larrowe
+ *
+ *  This file is part of Minilibc.
+ *
+ *  Minilibc is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Lesser General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  Minilibc is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with Minilibc.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #ifndef _VARARGS_H
 #define _VARARGS_H 1
+
+#include <features.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -24,7 +45,7 @@ extern "C" {
 # define va_end(x) ((x) = (va_list)0)
 # define va_copy(x,y) ((x) = (y))
 # define va_arg(x,y) (*(*(y **)&x)++)
-# ifdef __GNUC___
+# ifdef __GNUC__
 typedef __builtin_va_list va_list;
 # else
 typedef char *va_list;

@@ -1,14 +1,35 @@
+/*
+ *  Copyright (C) 2019 James Larrowe
+ *
+ *  This file is part of Minilibc.
+ *
+ *  Minilibc is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Lesser General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  Minilibc is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with Minilibc.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 #include <stdio.h>
 
 char *gets(char *str)
 {
     size_t ctr;
-    int ch = '\0';
-    for( ctr = 0; ch != '\n' && ch != EOF; ctr++ )
+    int ch;
+
+    for( ch = ctr = 0; ch != '\n' && ch != EOF; ctr++ )
     {
-        ch = fgetc(stdin);
+        ch = getchar();
         str[ctr] = ch;
     }
-    str[--ctr] = '\0';
+
+    str[--ctr] = 0;
     return str;
 }
