@@ -1,22 +1,3 @@
-/*
- *  Copyright (C) 2019 James Larrowe
- *
- *  This file is part of Minilibc.
- *
- *  Minilibc is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Lesser General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Minilibc is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public License
- *  along with Minilibc.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 #ifndef _ELF_H
 #define _ELF_H 1
 
@@ -39,7 +20,6 @@ struct Elf32_auxv_t
 };
 typedef struct Elf32_auxv_t Elf32_auxv_t;
 
-#ifndef __PTR16__
 struct Elf64_auxv_t
 {
     uint64_t a_type;
@@ -49,13 +29,6 @@ struct Elf64_auxv_t
     } a_un;
 };
 typedef struct Elf64_auxv_t Elf64_auxv_t;
-#endif
-
-#if defined(__PTR64__)
-# define Elf_auxv_t Elf64_auxv_t
-#else
-# define Elf_auxv_t Elf32_auxv_t
-#endif
 
 #define AT_NULL 0
 #define AT_IGNORE 1

@@ -1,22 +1,3 @@
-/*
- *  Copyright (C) 2019 James Larrowe
- *
- *  This file is part of Minilibc.
- *
- *  Minilibc is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Lesser General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Minilibc is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public License
- *  along with Minilibc.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 #ifndef _LIMITS_H
 #define _LIMITS_H 1
 
@@ -26,22 +7,18 @@
 extern "C" {
 #endif
 
-#if defined(__UINT8_MAX__) && !defined(UINT8_MAX) && !defined(UCHAR_MAX)
-# define UINT8_MAX __UINT8_MAX__
-# define UCHAR_MAX UINT8_MAX
+#if defined(__UINT8_MAX__) && !defined(UCHAR_MAX)
+# define UCHAR_MAX __UINT8_MAX__
 #endif
-#if defined(__UINTPTR_MAX__) && !defined(UINTPTR_MAX)
-# define UINTPTR_MAX __UINTPTR_MAX__
+#if defined(__INTPTR_MAX__) && !defined(SSIZE_MAX)
+# define SSIZE_MAX __INTPTR_MAX__
 #endif
-#if defined(__SIZE_MAX__) && !defined(SIZE_MAX)
-# define SIZE_MAX __SIZE_MAX__
-#endif
-#if defined(__INTPTR_MAX__) && !defined(INTPTR_MAX) && !defined(SSIZE_MAX)
-# define INTPTR_MAX __INTPTR_MAX__
-# define SSIZE_MAX INTPTR_MAX
+#if defined(__INT_MAX__) && !defined(INT_MAX)
+# define INT_MAX __INT_MAX__
 #endif
 
 #define ATEXIT_MAX 128
+#define PATH_MAX 4096
 
 #ifdef __cplusplus
 }

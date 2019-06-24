@@ -1,36 +1,13 @@
-/*
- *  Copyright (C) 2019 James Larrowe
- *
- *  This file is part of Minilibc.
- *
- *  Minilibc is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Lesser General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Minilibc is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public License
- *  along with Minilibc.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 #include <string.h>
-
-#define ucp(x) ((unsigned char *)(x))
 
 int memcmp(const void *ptr1, const void *ptr2, size_t n)
 {
-    size_t ctr;
+    const unsigned char *s1 = (const unsigned char *)ptr1,
+                        *s2 = (const unsigned char *)ptr2;
 
-    for( ctr = 0; ctr < n; ctr++ )
-    {
-        if(ucp(ptr1)[ctr] > ucp(ptr2)[ctr]) goto not_equal;
-        else if(ucp(ptr2)[ctr] > ucp(ptr1)[ctr]) goto not_equal;
-    }
+    while( n-- > 0 )
+        if(*s1++ != *s2++)
+            return *--s1 - *--s2;
+
     return 0;
-not_equal:
-    return ucp(ptr1)[ctr] - ucp(ptr2)[ctr];
 }

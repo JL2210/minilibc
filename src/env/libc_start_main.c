@@ -1,52 +1,56 @@
-/*
- *  Copyright (C) 2019 James Larrowe
- *
- *  This file is part of Minilibc.
- *
- *  Minilibc is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Lesser General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Minilibc is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public License
- *  along with Minilibc.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 #include <elf.h>
+#include <errno.h>
 #include <unistd.h>
+#include <string.h>
 #include <stdlib.h>
 #include <sys/types.h>
-#include <stdnoreturn.h>
 
-extern void _init(void);
-extern void _fini(void);
+#if UINTPTR_MAX == 0xffffffffffffffffUL
+# define Elf_auxv_t Elf64_auxv_t
+#else
+# define Elf_auxv_t Elf32_auxv_t
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+void _init(void);
+void _fini(void);
+#ifdef __cplusplus
+}
+#endif
 
 #define AUX_NUM 38
 
 _Noreturn int __libc_start_main
 (
-int (*main)(int, char**, char**, size_t*),
+int (*___main)(),
 int argc,
 char **argv
 )
 {
     int ret;
     Elf_auxv_t *auxv;
-
-    environ = argv + argc + 1;
-    for( ret = 0; environ[ret]; ret++ );
-    auxv = (Elf_auxv_t *)(environ + ret + 1);
     size_t aux[AUX_NUM];
+    /* Do some f*cking around with function names
+     * to make g++ and clang++ happy
+     */
+    void *__main = (void *)___main;
+    int (*_main)(int, char **, char **, size_t *) = (int (*)(int, char **, char **, size_t *))__main;
+
+    program_invocation_name = *argv;
+    program_invocation_short_name = strrchr(*argv, '/') + 1;
+    environ = argv + argc + 1;
+
+    for( ret = 0; environ[ret]; ret++ );
+
+    auxv = (Elf_auxv_t *)(environ + ret + 1);
+
     for( ret = 0; ret < AUX_NUM; ret++ )
         aux[ret] = auxv[ret].a_un.a_val;
 
     _init();
-    ret = main(argc, argv, environ, aux);
+    ret = _main(argc, argv, environ, aux);
     _fini();
 
     exit(ret);

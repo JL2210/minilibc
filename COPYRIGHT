@@ -1,0 +1,12 @@
+minilibc as a whole is licensed under the GNU LGPL version 3 or later.
+See the files COPYING and COPYING.LESSER for the text of this license.
+
+Unless explicitly stated, all files within this project are original works
+are Copyright © 2019 James Larrowe, the author of this library.
+
+The decision to exclude copyright comments within the source is intentional,
+as it decreases required disk space to store the sources of the library.
+
+If you believe that a file in minilibc is trivial enough that it may be
+released in the Public Domain, please contact me and, if I agree, I will
+explicitly release it from copyright.

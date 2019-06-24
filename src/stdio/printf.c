@@ -1,32 +1,13 @@
-/*
- *  Copyright (C) 2019 James Larrowe
- *
- *  This file is part of Minilibc.
- *
- *  Minilibc is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU Lesser General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Minilibc is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Lesser General Public License for more details.
- *
- *  You should have received a copy of the GNU Lesser General Public License
- *  along with Minilibc.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 #include <stdio.h>
 #include <stdarg.h>
 
 int printf(const char *fmt, ...)
 {
-    int ret = 0;
+    int ret;
     va_list ap;
 
     va_start(ap, fmt);
-    ret = vprintf(fmt, ap);
+    ret = vfprintf(stdout, fmt, ap);
     va_end(ap);
 
     return ret;
