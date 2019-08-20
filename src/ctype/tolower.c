@@ -1,7 +1,6 @@
 #include <ctype.h>
-#undef tolower
 
-int tolower(int c)
+int (tolower)(int c)
 {
-        return islower(c) ? c : c | (1 << 5);
+    return (unsigned)c - 'A' < 26 ? _tolower(c) : c;
 }

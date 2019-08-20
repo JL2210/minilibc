@@ -1,7 +1,6 @@
-#include <stdio.h>
-#undef toascii
+#include <ctype.h>
 
-int toascii(int c)
+int (toascii)(int c)
 {
-        return c & ~(1 << 7);
+    return c & ~(1 << 7);
 }

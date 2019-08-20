@@ -1,12 +1,13 @@
 #include <stdlib.h>
 #include <stdint.h>
+#include <limits.h>
 
 static unsigned seed = 1;
 
 int rand_r(unsigned *seedp)
 {
     unsigned ret;
-    uintptr_t reg = *(uintptr_t *)"Minilibc";
+    uintptr_t reg = 0x6362696c696e694d % UINTPTR_MAX;
     if(*seedp*2 <= (unsigned)RAND_MAX) *seedp = (*seedp + 1) * (reg + 1);
     *seedp = *seedp * reg + 1;
     ret = *seedp % ((unsigned)RAND_MAX+1);

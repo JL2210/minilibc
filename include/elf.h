@@ -2,33 +2,19 @@
 #define _ELF_H 1
 
 #include <features.h>
-#include <stdint.h>
+
+#define __need_uint32_t
+#define __need_uint64_t
+#define __need_uintptr_t
+#define __need_Elf_auxv_t
+#define __need_Elf32_auxv_t
+#define __need_Elf64_auxv_t
+
+#include <bits/alldefs.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-/* Types */
-
-struct Elf32_auxv_t
-{
-    uint32_t a_type;
-    union
-    {
-        uint32_t a_val;
-    } a_un;
-};
-typedef struct Elf32_auxv_t Elf32_auxv_t;
-
-struct Elf64_auxv_t
-{
-    uint64_t a_type;
-    union
-    {
-        uint64_t a_val;
-    } a_un;
-};
-typedef struct Elf64_auxv_t Elf64_auxv_t;
 
 #define AT_NULL 0
 #define AT_IGNORE 1

@@ -2,5 +2,8 @@
 
 char *strcat(char *dest, const char *src)
 {
-    return strncat(dest, src, strlen(src));
+    char *d = dest;
+    while(*d) d++;
+    while((*d++ = *src++));
+    return dest;
 }

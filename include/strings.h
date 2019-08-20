@@ -2,8 +2,11 @@
 #define _STRINGS_H 1
 
 #include <features.h>
-#include <locale.h>
-#include <sys/types.h>
+
+#define __need_size_t
+#define __need_locale_t
+
+#include <bits/alldefs.h>
 
 #ifdef __cplusplus
 extern "C" {

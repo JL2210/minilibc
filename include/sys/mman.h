@@ -2,7 +2,11 @@
 #define _SYS_MMAN_H 1
 
 #include <features.h>
-#include <sys/types.h>
+
+#define __need_off_t
+#define __need_size_t
+
+#include <bits/alldefs.h>
 
 #ifdef __cplusplus
 extern "C" {

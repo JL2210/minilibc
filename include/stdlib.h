@@ -1,38 +1,34 @@
 #ifndef _STDLIB_H
-#define _STDLIB_H
+#define _STDLIB_H 1
 
 #include <features.h>
-#include <stddef.h>
-#include <limits.h>
+
+#define __need_NULL
+#define __need_size_t
+#define __need_wchar_t
+#define __need___compar_fn_t
+
+#include <bits/alldefs.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* Defined symbols */
-#define ulltoa __ulltoa
-#define nulltoa __nulltoa
-#define lltoa __lltoa
-#define nlltoa __nlltoa
-
 /* Macros */
-#define ultoa ulltoa
-#define nultoa nulltoa
-#define ltoa lltoa
-#define nltoa nlltoa
-#define utoa ulltoa
-#define nutoa nulltoa
-#define itoa lltoa
-#define nitoa nlltoa
-#define atoi(x) ((int)atoll(x))
-#define atol(x) ((long)atoll(x))
-#define strtoull(x,y,z) strtoll(x,y,z)
-#define strtoul(x,y,z) strtoll(x,y,z)
-#define strtol(x,y,z) strtoll(x,y,z)
+#define atoi(x) ((int)atoll((x)))
+#define atol(x) ((long)atoll((x)))
+#define strtoull(x, y, z) strtoll((x), (y), (z))
+#define strtoul(x, y, z) strtoll((x), (y), (z))
+#define strtol(x, y, z) strtoll((x), (y), (z))
 
-#define RAND_MAX INT_MAX
-#define EXIT_FAILURE (1)
 #define EXIT_SUCCESS (0)
+#define EXIT_FAILURE (!EXIT_SUCCESS)
+
+#ifdef __INT_MAX__
+# define RAND_MAX __INT_MAX__
+#else
+# define RAND_MAX (((unsigned)-1)/2)
+#endif
 
 extern int atexit(void (*)(void));
 extern _Noreturn void exit(int);
@@ -55,14 +51,13 @@ __extension__ extern long long atoll(const char *);
 extern long (atol)(const char *str);
 extern int (atoi)(const char *str);
 
-__extension__ extern char *ulltoa(unsigned long long, char *, int);
-__extension__ extern size_t nulltoa(unsigned long long, int);
-__extension__ extern char *lltoa(long long, char *, int);
-__extension__ extern size_t nlltoa(long long, int);
-
 extern int rand_r(unsigned *);
 extern int rand(void);
 extern void srand(unsigned);
+
+extern void qsort(void *, size_t, size_t, __compar_fn_t);
+
+extern char *getenv(const char *);
 
 #ifdef __cplusplus
 }

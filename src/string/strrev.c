@@ -2,13 +2,15 @@
 
 char *strrev(char *str)
 {
-    char tmp, *p1 = str, *p2;
-    size_t len = strlen(str);
+    char tmp, *p1 = str, *p2 = str;
+    size_t len = 0;
 
-    p2 = str + len - 1;
+    while(*p2) p2++, len++;
+
+    --p2;
     len /= 2;
 
-    while( len-- > 0 )
+    while( len-- )
     {
         tmp = *p1;
         *p1++ = *p2;

@@ -2,17 +2,22 @@
 #define _TIME_H 1
 
 #include <features.h>
-#include <sys/types.h>
+
+#define __need_pid_t
+#define __need_size_t
+#define __need_time_t
+#define __need_clock_t
+#define __need_timer_t
+#define __need_locale_t
+#define __need_sigevent
+#define __need_timespec
+#define __need_clockid_t
+
+#include <bits/alldefs.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-struct timespec
-{
-    time_t tv_sec;
-    suseconds_t tv_nsec;
-};
 
 time_t time(time_t *);
 int nanosleep(const struct timespec *, struct timespec *);

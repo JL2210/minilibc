@@ -844,5 +844,3 @@
 #define __NR_fsconfig 431
 #define __NR_fsmount 432
 #define __NR_fspick 433
-#undef SYS_mmap
-#define SYS_mmap SYS_mmap2

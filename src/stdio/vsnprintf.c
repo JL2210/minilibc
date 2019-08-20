@@ -1,7 +1,81 @@
 #include <stdio.h>
+#include <errno.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
+
+#define BASE_BIN 2
+#define BASE_OCT 8
+#define BASE_DEC 10
+#define BASE_HEX 16
+#define BASE_02Z 36
+
+static char *ulltoa(unsigned long long val, char *buf, int base)
+{
+    int remainder;
+    char c, *tmp = buf;
+
+    if(base < BASE_BIN)
+    {
+        errno = EINVAL;
+        return NULL;
+    }
+
+    do {
+        remainder = val % base;
+        if(remainder >= BASE_DEC) c = 'a' - BASE_DEC;
+        else c = '0';
+        *tmp++ = remainder + c;
+        val /= base;
+    } while(val);
+
+    *tmp = 0;
+    return strrev(buf);
+}
+
+static size_t nulltoa(unsigned long long val, int base)
+{
+    size_t size = 0;
+
+    if(base < BASE_BIN)
+    {
+        errno = EINVAL;
+        return 0;
+    }
+
+    do {
+        size++;
+        val /= base;
+    } while(val);
+
+    return size;
+}
+
+static char *lltoa(long long val, char *buf, int base)
+{
+    char *s = buf;
+    if(val < 0 && base == BASE_DEC)
+    {
+         val = -val;
+         *s++ = '-';
+    }
+
+    ulltoa(val, s, base);
+    return buf;
+}
+
+static size_t nlltoa(long long val, int base)
+{
+    unsigned char size = 0;
+
+    if(val < 0 && base == BASE_DEC)
+    {
+        val = -val;
+        size++;
+    }
+
+    return size + nulltoa(val, base);
+}
 
 static
 void printf_int_helper
@@ -91,7 +165,9 @@ check_type:
         case 'h':
             ctr++;
             goto check_type;
-            break;
+        case 'z':
+            isiz = sizeof(size_t);
+            goto check_type;
         case 'c':
             if(wr) *str++ = va_arg(ap, int);
             num++;

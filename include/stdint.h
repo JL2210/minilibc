@@ -3,36 +3,55 @@
 
 #include <features.h>
 
+#define __need_int8_t
+#define __need_int16_t
+#define __need_int32_t
+#define __need_int64_t
+#define __need_uint8_t
+#define __need_intptr_t
+#define __need_intmax_t
+#define __need_uint16_t
+#define __need_uint32_t
+#define __need_uint64_t
+#define __need_uintptr_t
+#define __need_uintmax_t
+
+#include <bits/alldefs.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef char int8_t;
-typedef short int16_t;
-typedef int int32_t;
-typedef long intptr_t;
-__extension__ typedef long long int64_t;
-
-typedef unsigned char uint8_t;
-typedef unsigned short uint16_t;
-typedef unsigned int uint32_t;
-typedef unsigned long uintptr_t;
-__extension__ typedef unsigned long long uint64_t;
-
-#if defined(__UINT8_MAX__) && !defined(UINT8_MAX)
-# define UINT8_MAX __UINT8_MAX__
+#ifndef UINT8_MAX
+# ifdef __UINT8_MAX__
+#  define UINT8_MAX __UINT8_MAX__
+# else
+#  define UINT8_MAX ((uint8_t)-1)
+# endif
 #endif
 
-#if defined(__INTPTR_MAX__) && !defined(INTPTR_MAX)
-# define INTPTR_MAX __INTPTR_MAX__
+#ifndef UINTPTR_MAX
+# ifdef __UINTPTR_MAX__
+#  define UINTPTR_MAX __UINTPTR_MAX__
+# else
+#  define UINTPTR_MAX ((uintptr_t)-1)
+# endif
 #endif
 
-#if defined(__UINTPTR_MAX__) && !defined(UINTPTR_MAX)
-# define UINTPTR_MAX __UINTPTR_MAX__
+#ifndef INTPTR_MAX
+# ifdef __INTPTR_MAX__
+#  define INTPTR_MAX __INTPTR_MAX__
+# else
+#  define INTPTR_MAX (((uintptr_t)-1)/2)
+# endif
 #endif
 
-#if defined(__SIZE_MAX__) && !defined(SIZE_MAX)
-# define SIZE_MAX __SIZE_MAX__
+#ifndef SIZE_MAX
+# ifdef __SIZE_MAX__
+#  define SIZE_MAX __SIZE_MAX__
+# else
+#  define SIZE_MAX ((size_t)-1)
+# endif
 #endif
 
 #ifdef __cplusplus

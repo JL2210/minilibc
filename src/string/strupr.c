@@ -1,5 +1,5 @@
-#include <string.h>
 #include <ctype.h>
+#include <string.h>
 
 char *strupr(char *str)
 {

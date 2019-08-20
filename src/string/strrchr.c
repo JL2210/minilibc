@@ -2,5 +2,5 @@
 
 char *strrchr(const char *s, int c)
 {
-    return (char *)memrchr(s, c, strlen(s) + 1);
+    const unsigned char *us = (const unsigned char *)s;
 }

@@ -2,13 +2,15 @@
 #define _LOCALE_H 1
 
 #include <features.h>
-#include <stddef.h>
+
+#define __need_NULL
+#define __need_locale_t
+
+#include <bits/alldefs.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef int locale_t;
 
 #ifdef __cplusplus
 }

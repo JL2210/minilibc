@@ -8,7 +8,8 @@ char *fgets(char *str, int len, FILE *stream)
     while(--len > 0 && ch != '\n')
     {
         ch = fgetc(stream);
-        if(ch == EOF) goto ret;
+        if(ch == EOF)
+            goto ret;
         *tmp++ = ch;
     }
 

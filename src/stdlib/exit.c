@@ -2,17 +2,43 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <unistd.h>
+#include <limits.h>
 
-extern void (**__atexit_arr)(void);
-extern uint8_t __atexit_ctr;
+#define MIN_ATEXIT_MAX 32
+
+typedef void (*atexit_func_t)(void);
+
+struct atexit {
+	struct atexit *prev;
+	atexit_func_t func[MIN_ATEXIT_MAX];
+	int8_t ctr;
+	struct atexit *next;
+};
+static struct atexit list[1], *head = list;
+
+int atexit(atexit_func_t func)
+{
+    if(head->ctr >= MIN_ATEXIT_MAX)
+    {
+        struct atexit *tmp = calloc(1, sizeof(*tmp));
+        if(!tmp) return -1;
+        head->next = tmp;
+        head->next->prev = head;
+        head = head->next;
+    }
+    head->func[head->ctr++] = func;
+    return 0;
+}
 
 _Noreturn void exit(int ret)
 {
-    int ctr = 0;
+    while(head)
+    {
+        while(head->ctr--)
+            head->func[head->ctr]();
+        head = head->prev;
+    }
 
-    for( ctr = 0; ctr < __atexit_ctr; ctr++ )
-        (__atexit_arr[ctr])();
-    free(__atexit_arr);
     fflush(NULL);
     _exit(ret);
 }

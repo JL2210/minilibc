@@ -11,10 +11,10 @@ int setvbuf(FILE *stream, char *buf, int type, size_t size)
     }
     if(buf)
     {
-        stream->buffer = buf;
-        stream->bufsiz.size = stream->bufsiz.orig = size;
-        stream->bufsiz.written = 0;
+        stream->__buffer = buf;
+        stream->__bufsiz.__size = stream->__bufsiz.__orig = size;
+        stream->__bufsiz.__written = 0;
     }
-    stream->flags = (stream->flags & __IO_BF_MASK) | type;
+    stream->__flags = (stream->__flags & __IO_BF_MASK) | type;
     return 0;
 }

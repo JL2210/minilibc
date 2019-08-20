@@ -1,0 +1,16 @@
+The type of integer required to hold the maximum size of an array (sisze_t) is
+
+unsigned long
+
+on platforms where long and void * are 64 bits long and
+
+unsigned int
+
+on all other platforms.
+
+The type of integer required to hold the difference between two pointers
+to elements of the same array (ptrdiff_t) is
+
+signed long
+
+on all platforms.

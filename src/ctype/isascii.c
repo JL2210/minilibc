@@ -1,7 +1,6 @@
-#include <stdio.h>
-#undef isascii
+#include <ctype.h>
 
-int isascii(int c)
+int (isascii)(int c)
 {
-        return !(c & (1 << 7));
+    return !(c & (1 << 7));
 }

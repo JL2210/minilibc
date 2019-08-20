@@ -2,17 +2,16 @@
 #define _SYS_TIME_H 1
 
 #include <features.h>
-#include <sys/types.h>
+
+#define __need_time_t
+#define __need_timeval
+#define __need_suseconds_t
+
+#include <bits/alldefs.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-struct timeval
-{
-    time_t tv_sec;
-    suseconds_t tv_usec;
-};
 
 #ifdef __cplusplus
 }

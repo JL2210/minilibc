@@ -1,0 +1,6 @@
+The arguments to main are as follows:
+
+int argc; /* number of arguments */
+char **argv; /* array of arguments */
+char **envp; /* array of environment variables */
+Elf_auxv_t *auxv; /* ELF auxilliary vector */

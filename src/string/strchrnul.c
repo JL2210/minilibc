@@ -2,9 +2,7 @@
 
 char *strchrnul(const char *s, int c)
 {
-    char *ret = strchr(s, c);
-
-    if(ret == NULL) ret = (char *)s + strlen(s);
-
-    return ret;
+    const unsigned char *us = (const unsigned char *)s;
+    while( *us && *us != (unsigned char)c) us++;
+    return (char *)us;
 }

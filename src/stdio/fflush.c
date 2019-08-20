@@ -3,20 +3,21 @@
 
 int fflush(FILE *ostream)
 {
-    ssize_t size;
-
     if(!ostream)
         ostream = stdout;
 
-    if(ostream->bufsiz.written)
+    if(ostream->__bufsiz.__written)
     {
-        ostream->buffer -= ostream->bufsiz.written;
-        size = write(fileno(ostream),
-                     ostream->buffer,
-                     ostream->bufsiz.written);
+        ssize_t size;
+        int fd = fileno(ostream);
+        ostream->__buffer -= ostream->__bufsiz.__written;
+        size = write(fd,
+                     ostream->__buffer,
+                     ostream->__bufsiz.__written);
         if(size == -1) return EOF;
-        ostream->bufsiz.size = ostream->bufsiz.orig;
-        ostream->bufsiz.written = 0;
+        ostream->__bufsiz.__size = ostream->__bufsiz.__orig;
+        ostream->__bufsiz.__written = 0;
+        fsync(fd);
     }
     return 0;
 }

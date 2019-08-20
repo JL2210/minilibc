@@ -1,4 +1,0 @@
-void __main(void)
-{
-    ;
-}

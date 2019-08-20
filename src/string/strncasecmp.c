@@ -1,17 +1,17 @@
-#include <strings.h>
-#include <string.h>
-#include <stdlib.h>
 #include <ctype.h>
+#include <strings.h>
 
 int strncasecmp(const char *str1, const char *str2, size_t len)
 {
-        int ret;
-        char *str1dup = strlwr(strndup(str1, len)),
-             *str2dup = strlwr(strndup(str2, len));
+    const unsigned char *s1 = (const unsigned char *)str1,
+                        *s2 = (const unsigned char *)str2;
 
-        ret = strncmp(str1dup, str2dup, len);
+    while( len-- && *s1 && *s2 )
+    {
+        if(tolower(*s1) != tolower(*s2))
+            return tolower(*s1) - tolower(*s2);
+        s1++, s2++;
+    }
 
-        free(str1dup);
-        free(str2dup);
-        return ret;
+    return 0;
 }

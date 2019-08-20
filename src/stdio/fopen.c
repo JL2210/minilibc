@@ -44,11 +44,11 @@ FILE *fopen(const char *path, const char *_mode)
     fp = (FILE *)malloc(sizeof(*fp));
 
     memset(fp, 0, sizeof(*fp));
-    fp->flags |= _IONBF;
+    fp->__flags |= _IONBF;
 
-    fp->fd = open(path, mode);
+    fp->__fd = open(path, mode);
 
-    if(fp->fd == -1) return NULL;
+    if(fp->__fd == -1) return NULL;
 
     return fp;
 }

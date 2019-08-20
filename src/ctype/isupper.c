@@ -1,7 +1,6 @@
 #include <ctype.h>
-#undef isupper
 
-int isupper(int c)
+int (isupper)(int c)
 {
-        return (unsigned)c - 'A' < 26;
+    return (unsigned)c - 'A' < 26;
 }

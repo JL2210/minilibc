@@ -1,6 +1,6 @@
+#include <unistd.h>
 #include <sys/stat.h>
 #include <sys/syscall.h>
-#include <unistd.h>
 
 mode_t umask(mode_t mode)
 {

@@ -9,7 +9,9 @@ extern "C" {
 
 #define errno (*__errno_location())
 
+extern int sys_nerr;
 int *__errno_location(void);
+extern const char *const sys_errlist[];
 
 #ifdef _GNU_SOURCE
 # define program_invocation_name __program_invocation_name
@@ -57,7 +59,7 @@ extern char *program_invocation_name, *program_invocation_short_name;
 #define ENOSYS       38      /* Function not implemented */
 #define ENOTEMPTY    39      /* Directory not empty */
 #define ELOOP        40      /* Too many symbolic links encountered */
-#define EWOULDBLOCK  41      /* Operation would block */
+#define	EWOULDBLOCK  EAGAIN  /* Operation would block */
 #define ENOMSG       42      /* No message of desired type */
 #define EIDRM        43      /* Identifier removed */
 #define ECHRNG       44      /* Channel number out of range */
@@ -74,7 +76,7 @@ extern char *program_invocation_name, *program_invocation_short_name;
 #define ENOANO       55      /* No anode */
 #define EBADRQC      56      /* Invalid request code */
 #define EBADSLT      57      /* Invalid slot */
-#define	EDEADLOCK EDEADLK
+#define	EDEADLOCK    EDEADLK
 
 #ifdef __cplusplus
 }

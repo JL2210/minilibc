@@ -1,7 +1,6 @@
 #include <ctype.h>
-#undef isalpha
 
-int isalpha(int c)
+int (isalpha)(int c)
 {
-    return (unsigned)(c | (1 << 5)) - 'a' < 26;
+    return (unsigned)_tolower(c) - 'a' < 26;
 }

@@ -1,7 +1,20 @@
 #ifndef _SYS_STAT_H
 #define _SYS_STAT_H 1
 
-#include <sys/types.h>
+#include <features.h>
+
+#define __need_dev_t
+#define __need_ino_t
+#define __need_uid_t
+#define __need_gid_t
+#define __need_off_t
+#define __need_mode_t
+#define __need_time_t
+#define __need_nlink_t
+#define __need_blkcnt_t
+#define __need_blksize_t
+
+#include <bits/alldefs.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -23,6 +36,10 @@ extern "C" {
 #define S_IEXEC  0000100 /* Execute by owner. */
 
 mode_t umask(mode_t);
+#ifdef _GNU_SOURCE
+# define getumask __getumask
+mode_t getumask(void);
+#endif
 
 #ifdef __cplusplus
 }

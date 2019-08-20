@@ -3,5 +3,7 @@
 
 size_t strlen(const char *str)
 {
-    return strnlen(str, SSIZE_MAX);
+    const char *s = str;
+    while(*str) str++;
+    return str - s;
 }

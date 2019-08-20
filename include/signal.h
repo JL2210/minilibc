@@ -1,7 +1,16 @@
 #ifndef _SIGNAL_H
 #define _SIGNAL_H 1
 
-#include <sys/types.h>
+#include <features.h>
+
+#define __need_pid_t
+#define __need_uid_t
+#define __need_size_t
+#define __need_time_t
+#define __need_timespec
+#define __need_pthread_t
+
+#include <bits/alldefs.h>
 
 #ifdef __cplusplus
 extern "C" {

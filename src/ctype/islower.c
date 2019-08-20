@@ -1,7 +1,6 @@
 #include <ctype.h>
-#undef islower
 
-int islower(int c)
+int (islower)(int c)
 {
-        return (unsigned)c - 'a' < 26;
+    return (unsigned)c - 'a' < 26;
 }

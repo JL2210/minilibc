@@ -3,6 +3,12 @@
 
 char *strdup(const char *str)
 {
-        char *ret = (char *)malloc(strlen(str)+1);
-        return strcpy(ret, str);
+        const char *s = str;
+        char *dest, *d;
+
+	while(*str++);
+	d = dest = malloc(str - s);
+	if(dest) while((*d++ = *s++));
+
+        return dest;
 }

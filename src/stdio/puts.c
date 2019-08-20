@@ -2,7 +2,5 @@
 
 int puts(const char *str)
 {
-    int len = fputs(str, stdout) + 1;
-    putchar('\n');
-    return len;
+    return printf("%s\n", str);
 }

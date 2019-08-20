@@ -1,12 +1,15 @@
 #include <string.h>
+#include "internal/hot.h"
 
-void *memcpy(void *dest, const void *src, size_t num)
+HOT void *(memcpy)(void *restrict dest, const void *restrict src, size_t len)
 {
-    const unsigned char *s = (const unsigned char *)src;
-    unsigned char *d = (unsigned char *)dest;
+    char *dp = (char *restrict)dest;
+    const char *sp = (const char *restrict)src;
 
-    while( num-- > 0 )
-        *d++ = *s++;
+    while( len-- )
+    {
+        *dp++ = *sp++;
+    }
 
     return dest;
 }

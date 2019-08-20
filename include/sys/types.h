@@ -2,22 +2,23 @@
 #define _SYS_TYPES_H 1
 
 #include <features.h>
-#include <stddef.h>
+
+#define __need_off_t
+#define __need_dev_t
+#define __need_pid_t
+#define __need_mode_t
+#define __need_time_t
+#define __need_ssize_t
+#define __need_blkcnt_t
+#define __need_blksize_t
+#define __need_useconds_t
+#define __need_suseconds_t
+
+#include <bits/alldefs.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef unsigned long useconds_t;
-typedef long suseconds_t;
-typedef unsigned mode_t;
-typedef long blkcnt_t;
-typedef int blksize_t;
-typedef long ssize_t;
-typedef long time_t;
-typedef long off_t;
-typedef int dev_t;
-typedef int pid_t;
 
 #ifdef __cplusplus
 }

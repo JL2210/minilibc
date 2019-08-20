@@ -13,7 +13,7 @@ extern "C" {
 # if __STDC_VERSION__ >= 199901L
 #  define __assert_func_name__ __func__
 # else
-#  define __assert_func_name__ ""
+#  define __assert_func_name__ 0
 # endif
 #endif
 

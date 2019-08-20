@@ -25,7 +25,7 @@ extern "C" {
 # define va_start(x) ((x) = (va_list)&__va_alist)
 # define va_end(x) ((x) = (va_list)0)
 # define va_copy(x,y) ((x) = (y))
-# define va_arg(x,y) (*(*(y **)&x)++)
+# define va_arg(x,y) (*(*(y **)&(x))++)
 # ifdef __GNUC__
 typedef __builtin_va_list va_list;
 # else

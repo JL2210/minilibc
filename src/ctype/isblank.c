@@ -1,7 +1,6 @@
-#include <stdio.h>
-#undef isblank
+#include <ctype.h>
 
-int isblank(int c)
+int (isblank)(int c)
 {
-        return (c == ' ') || (c == '\t');
+    return c == ' ' || c == '\t';
 }

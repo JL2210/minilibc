@@ -14,10 +14,6 @@ extern "C" {
 # define _Noreturn __attribute__((__noreturn__))
 #endif
 
-#if __STDC_VERSION__ < 199901L
-# define inline /* */
-#endif
-
 #ifdef __cplusplus
 }
 #endif
