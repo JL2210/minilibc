@@ -1,20 +1,29 @@
-#include <stdio.h>
 #include <errno.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 int setvbuf(FILE *stream, char *buf, int type, size_t size)
 {
-    if(type && !(type & __STDIO_BUFFERED))
+    if(type & ~(_F_NBF | _F_LBF | _F_FBF))
     {
         errno = EINVAL;
         return -1;
     }
+
     if(buf)
     {
-        stream->__buffer = buf;
-        stream->__bufsiz.__size = stream->__bufsiz.__orig = size;
-        stream->__bufsiz.__written = 0;
+        stream->base = stream->ptr = buf;
+        stream->end = buf + size;
     }
-    stream->__flags = (stream->__flags & __IO_BF_MASK) | type;
+    else
+    {
+        if(size)
+            buf = malloc(size);
+        stream->base = stream->ptr = buf;
+        stream->end = buf + size;
+    }
+
+    stream->flags &= ~(_F_NBF | _F_LBF | _F_FBF);
+    stream->flags |= type;
     return 0;
 }

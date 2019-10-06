@@ -10,7 +10,7 @@ void *memmem(const void *haystack, size_t haystacklen,
         h = (const char *)memchr(h, *(const unsigned char *)needle, haystacklen);
         if(!h) break;
 
-        haystacklen -= h - (const char *)haystack;
+        haystacklen -= (size_t)(h - (const char *)haystack);
         haystack = h;
 
         if(!memcmp(h, needle, needlelen))

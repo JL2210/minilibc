@@ -2,7 +2,11 @@
 #include <unistd.h>
 #include <sys/syscall.h>
 
-int kill(pid_t pid, int sig)
+#include "libc-deps.h"
+
+int __kill(pid_t pid, int sig)
 {
-    return syscall(SYS_kill, pid, sig);
+    return __syscall(SYS_kill, pid, sig);
 }
+
+weak_alias(__kill, kill);

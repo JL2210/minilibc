@@ -2,5 +2,5 @@
 
 int (toascii)(int c)
 {
-    return c & ~(1 << 7);
+    return c & 0x7f;
 }

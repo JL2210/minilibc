@@ -1,19 +1,23 @@
 #include <stdlib.h>
 #include <string.h>
+#include "libc-deps.h"
 
-__extension__
-long long atoll(const char *str)
+long long __atoll(const char *str)
 {
     return strtoll(str, NULL, 10);
 }
 
-long (atol)(const char *str)
+long __atol(const char *str)
+{
+    return strtol(str, NULL, 10);
+}
+
+
+int (__atoi)(const char *str)
 {
     return atol(str);
 }
 
-
-int (atoi)(const char *str)
-{
-    return atoi(str);
-}
+weak_alias(__atoll, atoll);
+weak_alias(__atol, atol);
+weak_alias(__atoi, atoi);

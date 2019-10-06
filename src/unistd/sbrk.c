@@ -1,15 +1,25 @@
+#include <errno.h>
 #include <unistd.h>
 #include <sys/syscall.h>
 
-void *sbrk(intptr_t inc)
+#include "libc-deps.h"
+
+void *__sbrk(intptr_t inc)
 {
-    long curbrk = syscall(SYS_brk, NULL);
+#if defined(SYS_brk)
+    char *curbrk = (char *)__syscall(SYS_brk, NULL);
 
-    if( inc == 0 )
-        goto ret;
+    if(inc)
+        if((char *)__syscall(SYS_brk, curbrk+inc) != curbrk+inc)
+            curbrk = (char *)-1;
 
-    if(syscall(SYS_brk, curbrk+inc) != curbrk+inc)
-        curbrk = -1;
-ret:
-    return (void *)curbrk;
+    return curbrk;
+#elif defined(SYS_sbrk)
+    return __syscall(SYS_sbrk, inc);
+#else
+    errno = ENOSYS;
+    return (void *)-1;
+#endif
 }
+
+weak_alias(__sbrk, sbrk);

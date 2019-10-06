@@ -10,5 +10,5 @@ __asm__(
 #endif
 "\tmov %rsp, %rdi \n"
 "\tandq $-0x0f, %rsp \n"
-"\tcall _c_start \n"
+"\tcall _start_c \n"
 );

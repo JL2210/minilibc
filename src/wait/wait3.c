@@ -1,9 +1,10 @@
 #include <sys/wait.h>
-#include <sys/resource.h>
-#include <sys/syscall.h>
 
-pid_t wait3(int *status, int options, struct rusage *usage)
+#include "libc-deps.h"
+
+pid_t __wait3(int *status, int options, struct rusage *usage)
 {
-    return wait4(-1, status, options, usage);
+    return __wait4(-1, status, options, usage);
 }
 
+weak_alias(__wait3, wait3);

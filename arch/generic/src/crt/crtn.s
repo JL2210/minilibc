@@ -1,0 +1,3 @@
+.section .init
+
+.section .fini

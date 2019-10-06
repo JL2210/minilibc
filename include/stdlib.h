@@ -3,23 +3,25 @@
 
 #include <features.h>
 
+#if defined(_GNU_SOURCE) || \
+    defined(_DEFAULT_SOURCE)
+# include <alloca.h>
+#endif
+
 #define __need_NULL
+#define __need_div_t
+#define __need_ldiv_t
 #define __need_size_t
 #define __need_wchar_t
 #define __need___compar_fn_t
 
-#include <bits/alldefs.h>
-
-#ifdef __cplusplus
-extern "C" {
+#if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
+# define __need_lldiv_t
 #endif
 
-/* Macros */
-#define atoi(x) ((int)atoll((x)))
-#define atol(x) ((long)atoll((x)))
-#define strtoull(x, y, z) strtoll((x), (y), (z))
-#define strtoul(x, y, z) strtoll((x), (y), (z))
-#define strtol(x, y, z) strtoll((x), (y), (z))
+#include <bits/alldefs.h>
+
+#define atoi(x) ((int)atol((x)))
 
 #define EXIT_SUCCESS (0)
 #define EXIT_FAILURE (!EXIT_SUCCESS)
@@ -29,6 +31,8 @@ extern "C" {
 #else
 # define RAND_MAX (((unsigned)-1)/2)
 #endif
+
+__BEGIN_DECLS
 
 extern int atexit(void (*)(void));
 extern _Noreturn void exit(int);
@@ -40,27 +44,28 @@ extern void *calloc(size_t, size_t);
 extern void *malloc(size_t);
 extern void free(void *);
 
-__extension__ extern long long strtoll(const char *, char **, int);
-__extension__ extern unsigned long long (strtoull)(const char *, char **, int);
+extern int (atoi)(const char *str);
+extern long (atol)(const char *str);
+#if __STDC_VERSION__ >= 199901L
+extern long long atoll(const char *);
+
+extern long long strtoll(const char *, char **, int);
+extern unsigned long long strtoull(const char *, char **, int);
+#endif
 extern long (strtol)(const char *, char **, int);
 extern unsigned long (strtoul)(const char *, char **, int);
 
-extern double strtod(const char *, char **);
-
-__extension__ extern long long atoll(const char *);
-extern long (atol)(const char *str);
-extern int (atoi)(const char *str);
-
+#if _POSIX_C_SOURCE >= 1 || _XOPEN_SOURCE || _POSIX_SOURCE
 extern int rand_r(unsigned *);
+#endif
 extern int rand(void);
 extern void srand(unsigned);
 
 extern void qsort(void *, size_t, size_t, __compar_fn_t);
+extern void *bsearch(const void *, const void *, size_t, size_t, __compar_fn_t);
 
 extern char *getenv(const char *);
 
-#ifdef __cplusplus
-}
-#endif
+__END_DECLS
 
 #endif

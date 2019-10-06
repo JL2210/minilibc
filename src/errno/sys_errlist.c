@@ -1,7 +1,10 @@
+#define _DEFAULT_SOURCE 1
 #include <errno.h>
 #include <stddef.h>
 
-const char *const sys_errlist[] = {
+#include "libc-deps.h"
+
+const char *const __sys_errlist[] = {
     "Operation not permitted",
     "No such file or directory",
     "No such process",
@@ -42,7 +45,6 @@ const char *const sys_errlist[] = {
     "Function not implemented",
     "Directory not empty",
     "Too many symbolic links encountered",
-    "Operation would block",
     "No message of desired type",
     "Identifier removed",
     "Channel number out of range",
@@ -61,3 +63,6 @@ const char *const sys_errlist[] = {
     "Invalid slot",
     NULL
 };
+
+weak_alias(__sys_errlist, sys_errlist);
+weak_alias(__sys_errlist, _sys_errlist);

@@ -1,3 +1,15 @@
+*.a
 *.o
 *.out
 *.exe
+.deps/
+aclocal.m4
+autom4te.cache/
+build-aux/
+config.log
+config.status
+configure
+libtool
+m4/
+Makefile
+Makefile.in

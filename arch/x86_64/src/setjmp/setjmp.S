@@ -1,14 +1,21 @@
-.globl setjmp
-setjmp:
+#ifndef __ASSEMBLER__
+# define __ASSEMBLER__
+#endif
+#include <bits/setjmp.h>
+
+.globl __setjmp
+.globl _setjmp
+__setjmp:
+_setjmp:
 	pop %rsi
-	mov %rsp, (%rdi)
+	mov %rsp, (JB_SP*8)(%rdi)
 	push %rsi
-	mov %rbx, 8(%rdi)
-	mov %rbp, 16(%rdi)
-	mov %r12, 24(%rdi)
-	mov %r13, 32(%rdi)
-	mov %r14, 40(%rdi)
-	mov %r15, 48(%rdi)
-	mov %rsi, 56(%rdi)
+	mov %rsi, (JB_PC*8)(%rdi)
+	mov %rbx, (JB_BX*8)(%rdi)
+	mov %rbp, (JB_BP*8)(%rdi)
+	mov %r12, (JB_12*8)(%rdi)
+	mov %r13, (JB_13*8)(%rdi)
+	mov %r14, (JB_14*8)(%rdi)
+	mov %r15, (JB_15*8)(%rdi)
 	xor %eax, %eax
 	ret

@@ -2,7 +2,11 @@
 #include <unistd.h>
 #include <sys/syscall.h>
 
-int nanosleep(const struct timespec *req, struct timespec *rem)
+#include "libc-deps.h"
+
+int __nanosleep(const struct timespec *req, struct timespec *rem)
 {
-    return syscall(SYS_nanosleep, req, rem);
+    return __syscall(SYS_nanosleep, req, rem);
 }
+
+weak_alias(__nanosleep, nanosleep);

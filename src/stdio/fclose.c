@@ -4,10 +4,10 @@
 
 int fclose(FILE *fp)
 {
+    int r;
     fflush(fp);
-    free(fp->__buffer);
-    fsync(fp->__fd);
-    close(fp->__fd);
+    free(fp->base);
+    r = fp->close(fp);
     free(fp);
-    return 0;
+    return r;
 }

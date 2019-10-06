@@ -1,5 +1,5 @@
-#include <unistd.h>
 #include <time.h>
+#include <unistd.h>
 
 unsigned sleep(unsigned seconds)
 {
@@ -9,7 +9,7 @@ unsigned sleep(unsigned seconds)
     tv.tv_sec = seconds;
     tv.tv_nsec = 0;
 
-    if(nanosleep(&tv, &tv))
+    if(__nanosleep(&tv, &tv))
         ret = tv.tv_sec;
 
     return ret;

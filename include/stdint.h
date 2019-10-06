@@ -18,10 +18,6 @@
 
 #include <bits/alldefs.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #ifndef UINT8_MAX
 # ifdef __UINT8_MAX__
 #  define UINT8_MAX __UINT8_MAX__
@@ -52,10 +48,6 @@ extern "C" {
 # else
 #  define SIZE_MAX ((size_t)-1)
 # endif
-#endif
-
-#ifdef __cplusplus
-}
 #endif
 
 #endif

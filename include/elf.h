@@ -12,10 +12,6 @@
 
 #include <bits/alldefs.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #define AT_NULL 0
 #define AT_IGNORE 1
 #define AT_EXECFD 2
@@ -60,9 +56,5 @@ extern "C" {
 #define AT_L2_CACHEGEOMETRY 45
 #define AT_L3_CACHESIZE 46
 #define AT_L3_CACHEGEOMETRY 47
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

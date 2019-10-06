@@ -2,5 +2,5 @@
 
 int feof(FILE *stream)
 {
-    return stream->__flags & __STDIO_EOF;
+    return stream->flags & _F_EOF;
 }

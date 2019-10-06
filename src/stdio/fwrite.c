@@ -1,17 +1,23 @@
 #include <stdio.h>
+#include <errno.h>
 #include <string.h>
 #include <unistd.h>
-#include <stdlib.h>
 
-size_t fwrite(const void *p, size_t size, size_t count, FILE *stream)
+#include "libc-deps.h"
+
+size_t fwrite(const void *restrict ptr, size_t size, size_t count, FILE *stream)
 {
-    size_t ctr = 0;
-    while( ctr < count )
+    size_t len;
+    ssize_t num_written;
+
+    if(mul_overflow(count, size, len))
     {
-        if(write(fileno(stream), p, size) == -1)
-            break;
-        p = (const char *)p + size;
-        ctr++;
+        errno = EINVAL;
+        return 0;
     }
-    return ctr;
+
+    num_written = stream->write(stream, ptr, len);
+
+    if(num_written == -1) return num_written;
+    return num_written == (ssize_t)len ? count : num_written / size;
 }

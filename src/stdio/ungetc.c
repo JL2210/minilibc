@@ -2,5 +2,5 @@
 
 int ungetc(int c, FILE *stream)
 {
-    return stream->__unget = c;
+    return *stream->shortbuf = (unsigned char)c;
 }

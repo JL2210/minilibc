@@ -9,15 +9,6 @@
 
 #include <bits/alldefs.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-/* Microsoft extensions */
-#define strupr __strupr
-#define strlwr __strlwr
-#define strrev __strrev
-
 /* GNU extensions */
 #ifdef _GNU_SOURCE
 # define memmem __memmem
@@ -27,11 +18,15 @@ extern "C" {
 
 /* Inlining macros */
 #define strcoll(x, y) strcmp((x), (y))
+
+/* Optimizations */
 #ifdef __GNUC__
 # define memset(dest, c, len) __builtin_memset(dest, c, len)
 # define memcpy(dest, src, len) __builtin_memcpy(dest, src, len)
 # define memchr(dest, c, len) __builtin_memchr(dest, c, len)
 #endif
+
+__BEGIN_DECLS
 
 extern size_t strlen(const char *);
 extern size_t strnlen(const char *, size_t);
@@ -70,17 +65,18 @@ extern char *strcat(char *, const char *);
 
 extern void *(memset)(void *, int, size_t);
 
-extern char *strupr(char *);
-extern char *strlwr(char *);
-extern char *strrev(char *);
-
 extern size_t strspn(const char *, const char *);
 extern size_t strcspn(const char *, const char *);
 
 extern char *strerror(int);
 
-#ifdef __cplusplus
-}
+#ifdef _GNU_SOURCE
+extern int ffsl(long);
+# if __STDC_VERSION__ >= 199901L
+extern int ffsll(long long);
+# endif
 #endif
+
+__END_DECLS
 
 #endif

@@ -9,7 +9,7 @@ int strcasecmp(const char *str1, const char *str2)
     {
         if(toupper(*s1) != toupper(*s2))
             return toupper(*s1) - toupper(*s2);
-        s1++, s2++;
+        s1++; s2++;
     }
 
     return 0;

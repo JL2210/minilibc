@@ -1,31 +1,28 @@
 #include <stdlib.h>
+#include <string.h>
+#include "libc-deps.h"
 
-#define qsort_t struct { \
-		    char n[size]; \
-		}
-
-static void qsort_swap(void *a, void *b, size_t size)
+static void qsort_swap(char *a, char *b, size_t size)
 {
-    qsort_t buf, *qa = a, *qb = b;
-    buf = *qa;
-    *qa = *qb;
-    *qb = buf;
+    char buf[size];
+    memcpy(buf, a, size);
+    memcpy(a, b, size);
+    memcpy(b, buf, size);
 }
 
-static inline size_t qsort_partition(void *a, size_t first, size_t last, size_t size, __compar_fn_t cmp)
+static inline size_t qsort_partition(char *arr, size_t first, size_t last, size_t size, __compar_fn_t cmp)
 {
-    qsort_t *arr = a, *pivot;
+    char *pivot = &arr[last*size];
     size_t i, j;
-    pivot = arr + last;
     for ( i = j = first; j < last; j++ )
     {
-        if(cmp(arr + j, pivot) <= 0)
+        if(cmp(&arr[j*size], pivot) <= 0)
         {
-            qsort_swap(&arr[i], &arr[j], size);
+            qsort_swap(&arr[i*size], &arr[j*size], size);
             i++;
         }
     }
-    qsort_swap(&arr[i], pivot, size);
+    qsort_swap(&arr[i*size], pivot, size);
     return i;
 }
 

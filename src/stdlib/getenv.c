@@ -5,7 +5,7 @@
 char *getenv(const char *name)
 {
     char *saveptr;
-    char **tmp_env = environ;
+    char **tmp_env = __environ;
     do {
         if(!strcmp(strtok_r(*tmp_env, "=", &saveptr), name))
             return strtok_r(NULL, "=", &saveptr);

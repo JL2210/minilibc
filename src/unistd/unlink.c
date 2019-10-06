@@ -1,7 +1,12 @@
+#include <fcntl.h>
 #include <unistd.h>
 #include <sys/syscall.h>
 
-int unlink(const char *filename)
+#include "libc-deps.h"
+
+int __unlink(const char *filename)
 {
-    return syscall(SYS_unlink, filename);
+    return __unlinkat(AT_FDCWD, filename, 0);
 }
+
+weak_alias(__unlink, unlink);

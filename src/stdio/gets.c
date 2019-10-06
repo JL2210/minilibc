@@ -1,15 +1,19 @@
 #include <stdio.h>
 
-char *gets(char *str)
+#include "libc-deps.h"
+
+char *__gets(char *str)
 {
     int ch;
     char *tmp = str;
 
     while( (ch = getchar()) != EOF )
         if(ch == '\n') break;
-        else *(tmp++) = ch;
+        else *tmp++ = (unsigned char)ch;
 
     *tmp = 0;
 
     return str;
 }
+
+weak_alias(__gets, gets);

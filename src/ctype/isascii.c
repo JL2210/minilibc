@@ -2,5 +2,5 @@
 
 int (isascii)(int c)
 {
-    return !(c & (1 << 7));
+    return !((unsigned)c & ~(unsigned)0x7f);
 }

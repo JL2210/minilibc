@@ -4,16 +4,13 @@
 #include <features.h>
 
 #define __need_NULL
+#define __need_lconv
 #define __need_locale_t
 
 #include <bits/alldefs.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+__BEGIN_DECLS
 
-#ifdef __cplusplus
-}
-#endif
+__END_DECLS
 
 #endif

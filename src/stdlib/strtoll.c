@@ -2,11 +2,15 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
+#include "libc-deps.h"
 
+#define BASE_BIN 2
+#define BASE_OCT 8
+#define BASE_DEC 10
 #define BASE_HEX 16
 #define BASE_02Z 36
 
-#define GREATER(x,y) ((x) > (y) ? (x) : (y))
+#define GREATER(x, y) ((x) > (y) ? (x) : (y))
 
 long long strtoll(const char *str, char **endptr, int base)
 {
@@ -66,24 +70,23 @@ long long strtoll(const char *str, char **endptr, int base)
         ret += (tolower(str[ctr]) - c) * power;
     }
 
-    return ret;
+    return ret*neg;
 invalid:
     errno = EINVAL;
     return 0;
 }
 
-__extension__
 unsigned long long (strtoull)(const char *str, char **endptr, int base)
 {
-    return strtoull(str, endptr, base);
-}
-
-unsigned long (strtoul)(const char *str, char **endptr, int base)
-{
-    return strtoul(str, endptr, base);
+    return strtoll(str, endptr, base);
 }
 
 long (strtol)(const char *str, char **endptr, int base)
+{
+    return strtoll(str, endptr, base);
+}
+
+unsigned long (strtoul)(const char *str, char **endptr, int base)
 {
     return strtol(str, endptr, base);
 }

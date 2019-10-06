@@ -2,5 +2,5 @@
 
 void clearerr(FILE *stream)
 {
-    stream->__flags &= ~(__STDIO_EOF);
+    stream->flags &= ~(_F_EOF | _F_ERR);
 }

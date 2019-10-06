@@ -2,7 +2,11 @@
 #include <sys/mman.h>
 #include <sys/syscall.h>
 
-int munmap(void *addr, size_t length)
+#include "libc-deps.h"
+
+int __munmap(void *addr, size_t length)
 {
-    return syscall(SYS_munmap, addr, length);
+    return __syscall(SYS_munmap, addr, length);
 }
+
+weak_alias(__munmap, munmap);

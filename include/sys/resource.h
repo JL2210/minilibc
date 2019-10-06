@@ -3,17 +3,14 @@
 
 #include <features.h>
 
+#define __need_time_t
 #define __need_rusage
 #define __need_timeval
+#define __need_suseconds_t
 
 #include <bits/alldefs.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-}
-#endif
+__BEGIN_DECLS
+__END_DECLS
 
 #endif

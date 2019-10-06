@@ -3,13 +3,11 @@
 
 #include <features.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /* Not great, but it works... */
-#warning <varargs.h> is deprecated. \
-	 Revise your code to use <stdarg.h> instead.
+#ifdef __GNUC__
+# warning <varargs.h> is deprecated. \
+	  Revise your code to use <stdarg.h> instead.
+#endif
 
 #ifdef __i386__
 # undef va_start
@@ -34,10 +32,6 @@ typedef char *va_list;
 
 #else
 # error <varargs.h> has not been implemented for your platform yet.
-#endif
-
-#ifdef __cplusplus
-}
 #endif
 
 #endif

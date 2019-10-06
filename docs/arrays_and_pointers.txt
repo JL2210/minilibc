@@ -1,4 +1,4 @@
-The type of integer required to hold the maximum size of an array (sisze_t) is
+The type of integer required to hold the maximum size of an array (size_t) is
 
 unsigned long
 

@@ -1,6 +1,17 @@
 #include <stdio.h>
+#include <errno.h>
 
-int fileno(FILE *fp)
+#include "libc-deps.h"
+
+int __fileno(FILE *fp)
 {
-    return fp->__fd < 0 ? -1 : fp->__fd;
+    int ret = fp->fileno;
+    if(ret < 0)
+    {
+        ret = -1;
+        errno = EBADF;
+    }
+    return ret;
 }
+
+weak_alias(__fileno, fileno);

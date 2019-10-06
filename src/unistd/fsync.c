@@ -1,7 +1,11 @@
-#include <sys/syscall.h>
 #include <unistd.h>
+#include <sys/syscall.h>
 
-int fsync(int fd)
+#include "libc-deps.h"
+
+int __fsync(int fd)
 {
-    return syscall(SYS_fsync, fd);
+    return __syscall(SYS_fsync, fd);
 }
+
+weak_alias(__fsync, fsync);

@@ -2,7 +2,11 @@
 #include <unistd.h>
 #include <sys/syscall.h>
 
-time_t time(time_t *timeptr)
+#include "libc-deps.h"
+
+time_t __time(time_t *timeptr)
 {
-    return syscall(SYS_time, timeptr);
+    return __syscall(SYS_time, timeptr);
 }
+
+weak_alias(__time, time);

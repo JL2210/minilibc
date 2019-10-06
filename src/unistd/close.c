@@ -1,7 +1,17 @@
-#include <sys/syscall.h>
+#include <errno.h>
 #include <unistd.h>
+#include <sys/syscall.h>
 
-int close(int fd)
+#include "libc-deps.h"
+
+int __close(int fd)
 {
-    return syscall(SYS_close, fd);
+#ifdef SYS_close
+    return __syscall(SYS_close, fd);
+#else
+    errno = ENOSYS;
+    return -1;
+#endif
 }
+
+weak_alias(__close, close);

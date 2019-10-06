@@ -5,17 +5,16 @@
 
 #define __need_off_t
 #define __need_size_t
+#define __need_mode_t
 
 #include <bits/alldefs.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+__BEGIN_DECLS
 
 #define PROT_NONE      (0x0)
 #define PROT_READ      (0x1)
-#define PROT_WRITE     (1<<1)
-#define PROT_EXEC      (1<<2)
+#define PROT_WRITE     (0x2)
+#define PROT_EXEC      (0x4)
 
 #define MAP_FAILED    ((void *)-1)
 
@@ -28,9 +27,8 @@ extern "C" {
 
 extern void *mmap(void *, size_t, int, int, int, off_t);
 extern int munmap(void *, size_t);
+extern int mprotect(void *, size_t, int);
 
-#ifdef __cplusplus
-}
-#endif
+__END_DECLS
 
 #endif

@@ -1,0 +1,2 @@
+SUBDIRS = $(ARCH)
+DIST_SUBDIRS = arm generic i386 x86_64

@@ -9,7 +9,7 @@ int strcmp(const char *str1, const char *str2)
     {
         if(*s1 != *s2)
             return *s1 - *s2;
-        s1++, s2++;
+        s1++; s2++;
     }
 
     return 0;

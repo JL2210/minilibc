@@ -1,10 +1,10 @@
-#include <unistd.h>
 #include <sys/stat.h>
-#include <sys/syscall.h>
+
+#include "libc-deps.h"
 
 mode_t getumask(void)
 {
-    mode_t mask = umask(0);
-    umask(mask);
+    mode_t mask = __umask(0);
+    __umask(mask);
     return mask;
 }

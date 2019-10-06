@@ -16,9 +16,7 @@
 
 #include <bits/alldefs.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+__BEGIN_DECLS
 
 #define S_IFMT   0170000 /* These bits determine file type. */
 #define S_IFDIR  0040000 /* Directory. */
@@ -37,12 +35,9 @@ extern "C" {
 
 mode_t umask(mode_t);
 #ifdef _GNU_SOURCE
-# define getumask __getumask
 mode_t getumask(void);
 #endif
 
-#ifdef __cplusplus
-}
-#endif
+__END_DECLS
 
 #endif

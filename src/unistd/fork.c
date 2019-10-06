@@ -1,7 +1,17 @@
-#include <sys/syscall.h>
+#include <errno.h>
 #include <unistd.h>
+#include <sys/syscall.h>
 
-pid_t fork(void)
+#include "libc-deps.h"
+
+pid_t __fork(void)
 {
-    return syscall(SYS_fork);
+#if defined(SYS_fork)
+    return __syscall(SYS_fork);
+#else
+    errno = ENOSYS;
+    return -1;
+#endif
 }
+
+weak_alias(__fork, fork);

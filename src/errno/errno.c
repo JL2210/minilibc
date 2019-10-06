@@ -1,8 +1,8 @@
 #include <errno.h>
 #undef errno
 
-int errno = 0;
 int *__errno_location(void)
 {
+    static int errno = 0;
     return &errno;
 }

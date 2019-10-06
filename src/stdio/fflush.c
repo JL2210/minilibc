@@ -1,23 +1,30 @@
+#include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
 
 int fflush(FILE *ostream)
 {
+    int oflags;
+
     if(!ostream)
         ostream = stdout;
 
-    if(ostream->__bufsiz.__written)
+    oflags = (ostream->open_flags & O_RDWR ||
+              ostream->open_flags & O_WRONLY);
+
+
+    if(oflags && ostream->ptr != ostream->base)
     {
-        ssize_t size;
-        int fd = fileno(ostream);
-        ostream->__buffer -= ostream->__bufsiz.__written;
-        size = write(fd,
-                     ostream->__buffer,
-                     ostream->__bufsiz.__written);
+        ssize_t size =
+               ostream->write(ostream,
+                              ostream->base,
+                              ostream->ptr - ostream->base);
+
         if(size == -1) return EOF;
-        ostream->__bufsiz.__size = ostream->__bufsiz.__orig;
-        ostream->__bufsiz.__written = 0;
-        fsync(fd);
+
+        ostream->ptr = ostream->base;
+        __fsync(ostream->fileno);
     }
+
     return 0;
 }

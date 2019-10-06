@@ -1,7 +1,11 @@
 #include <unistd.h>
 #include <sys/syscall.h>
 
-pid_t getpid(void)
+#include "libc-deps.h"
+
+pid_t __getpid(void)
 {
-    return syscall(SYS_getpid);
+    return __syscall(SYS_getpid);
 }
+
+weak_alias(__getpid, getpid);

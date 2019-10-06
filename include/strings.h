@@ -8,15 +8,12 @@
 
 #include <bits/alldefs.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+__BEGIN_DECLS
 
 extern int strncasecmp(const char *, const char *, size_t);
 extern int strcasecmp(const char *, const char *);
+extern int ffs(int);
 
-#ifdef __cplusplus
-}
-#endif
+__END_DECLS
 
 #endif

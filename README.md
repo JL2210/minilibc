@@ -1,9 +1,11 @@
 minilibc
 ---
 
-This is minilibc, a small standard C library
-that aims to be compliant, small, and mostly
-written in C.
+This is minilibc, a standard C library
+that aims to be easy to read and understand,
+portable, and multi-system.
 
-Copying conditions are in [COPYING] and [COPYING.LESSER];
-extra terms and conditions are located in [COPYRIGHT].
+minilibc is licensed under the LGPLv2.1+.
+
+Copying conditions are in [COPYING](COPYING)
+and [COPYING.LESSER](COPYING.LESSER).

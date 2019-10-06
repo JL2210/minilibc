@@ -2,6 +2,5 @@
 
 int ferror(FILE *stream)
 {
-    (void)stream;
-    return 0;
+    return stream->flags & _F_ERR;
 }

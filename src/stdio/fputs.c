@@ -1,10 +1,7 @@
-#include <stdio.h>
 #include <string.h>
-#include <unistd.h>
+#include <stdio.h>
 
 int fputs(const char *str, FILE *stream)
 {
-    int len = strlen(str);
-    fwrite(str, len, 1, stream);
-    return len;
+    return fwrite(str, 1, strlen(str), stream);
 }

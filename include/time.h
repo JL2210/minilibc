@@ -15,15 +15,11 @@
 
 #include <bits/alldefs.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+__BEGIN_DECLS
 
 time_t time(time_t *);
 int nanosleep(const struct timespec *, struct timespec *);
 
-#ifdef __cplusplus
-}
-#endif
+__END_DECLS
 
 #endif

@@ -9,12 +9,7 @@
 
 #include <bits/alldefs.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-}
-#endif
+__BEGIN_DECLS
+__END_DECLS
 
 #endif
