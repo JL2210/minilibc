@@ -4,7 +4,7 @@
 #define __need_ssize_t
 #define __need_mode_t
 
-#include_next <stdio.h>
+#include "../../include/stdio.h"
 
 #define _F_NBF _IONBF
 #define _F_FBF _IOFBF
@@ -33,6 +33,9 @@ extern int __stdio_seek(FILE *, long, int);
 extern int __stdio_close(FILE *);
 
 extern int __fileno(FILE *);
+
+extern char *__gets(char *);
+extern char *gets(char *);
 
 extern const int __sys_nerr;
 extern const char *const __sys_errlist[];

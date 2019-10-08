@@ -39,10 +39,6 @@ long double nanl(const char *);
 double nan(const char *);
 float nanf(const char *);
 
-long double sinl(long double);
-double sin(double);
-float sinf(float);
-
 long double sqrtl(long double);
 double sqrt(double);
 float sqrtf(float);

@@ -1,7 +1,7 @@
 #ifndef ERRNO_H
 #define ERRNO_H 1
 
-#include_next <errno.h>
+#include "../../include/errno.h"
 
 extern const char *__program_invocation_name, *__program_invocation_short_name;
 

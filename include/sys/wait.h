@@ -15,6 +15,8 @@ __BEGIN_DECLS
 
 pid_t wait3(int *, int, struct rusage *);
 pid_t wait4(pid_t, int *, int, struct rusage *);
+pid_t waitpid(pid_t, int *, int);
+pid_t wait(int *);
 
 __END_DECLS
 

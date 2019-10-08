@@ -1,8 +1,8 @@
 #ifndef SIGNAL_H
 #define SIGNAL_H 1
 
-#include_next <signal.h>
+#include "../../include/signal.h"
 
-int __kill(pid_t, int);
+extern int __kill(pid_t, int);
 
 #endif

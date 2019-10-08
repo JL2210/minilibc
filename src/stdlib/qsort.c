@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <string.h>
-#include "libc-deps.h"
 
 static void qsort_swap(char *a, char *b, size_t size)
 {

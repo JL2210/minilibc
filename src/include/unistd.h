@@ -1,7 +1,7 @@
 #ifndef UNISTD_H
 #define UNISTD_H 1
 
-#include_next <unistd.h>
+#include "../../include/unistd.h"
 
 extern int __unlink(const char *);
 extern int __unlinkat(int, const char *, int);

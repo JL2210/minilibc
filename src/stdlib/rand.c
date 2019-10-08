@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdint.h>
-#include "libc-deps.h"
 
 #define SEED __extension__ 0x8F1334AA159590A4ULL
 

@@ -9,14 +9,14 @@
 
 int vfprintf(FILE *fp, const char *fmt, va_list _ap)
 {
-    int flags, isiz, fsiz = 0;
+    int flags, isiz;
     va_list ap;
     size_t ctr = 0,
            num = 0,
            len = strlen(fmt);
     va_copy(ap, _ap);
 
-    (void)fsiz; /* TODO: Add proper float formatting */
+    /* TODO: Add proper float formatting */
 
     while(ctr < len)
     {
@@ -34,7 +34,7 @@ int vfprintf(FILE *fp, const char *fmt, va_list _ap)
             fputc(fmt[ctr], fp);
             goto terminate;
         }
-        fsiz = sizeof(double);
+
         isiz = sizeof(int);
         flags = 0;
 check_type:
@@ -48,7 +48,6 @@ check_type:
             ctr++;
             goto check_type;
         case 'L':
-            fsiz = sizeof(long double);
             ctr++;
             goto check_type;
         case 'Z':
@@ -75,11 +74,6 @@ check_type:
         case 'x':
             printf_uint_helper(fp, &ap, 16, flags, isiz, &num);
             break;
-/*
-        case 'f':
-            printf_flt_helper(fp, &ap, flags, fsiz, &num);
-            break;
-*/
         case 'p':
             num += fputs("0x", fp);
             printf_int_helper(fp, &ap, 16, flags, sizeof(void *), &num);

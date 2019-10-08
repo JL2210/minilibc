@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+
 #include "libc-deps.h"
 
 long long __atoll(const char *str)
@@ -13,7 +14,7 @@ long __atol(const char *str)
 }
 
 
-int (__atoi)(const char *str)
+int __atoi(const char *str)
 {
     return atol(str);
 }

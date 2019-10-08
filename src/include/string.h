@@ -1,9 +1,11 @@
 #ifndef STRING_H
 #define STRING_H 1
 
-#include_next <string.h>
+#include "../../include/string.h"
 
-void *memmem(const void *, size_t,
-             const void *, size_t);
+extern void *memmem(const void *, size_t,
+                    const void *, size_t);
+extern char *stpcpy(char *, const char *);
+extern char *__stpcpy(char *, const char *);
 
 #endif

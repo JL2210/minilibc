@@ -1,7 +1,9 @@
 #include <strings.h>
 #include <limits.h>
 
-int ffs(int i)
+#include "libc-deps.h"
+
+int __ffs(int i)
 {
     int l = sizeof(i)*CHAR_BIT, ctr = 0;
 
@@ -14,3 +16,5 @@ int ffs(int i)
 
     return 0;
 }
+
+weak_alias(__ffs, ffs);

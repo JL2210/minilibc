@@ -3,20 +3,38 @@ AC_INIT(minilibc, 0.0)
 AC_CONFIG_MACRO_DIRS([m4])
 AC_CONFIG_AUX_DIR([build-aux])
 
-AM_INIT_AUTOMAKE([-Wall foreign])
+AC_CANONICAL_BUILD
+AC_CANONICAL_HOST
+
+AC_PROG_RANLIB
+
+AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 AM_PROG_AR
 AM_PROG_AS
 
-LT_INIT
+dnl Function to check cflags
+AC_DEFUN([AM_CHECK_CFLAG], [
+AC_MSG_CHECKING(whether the C compiler understands $1)
+old_CFLAGS="$CFLAGS"
+CFLAGS="$CFLAGS $1"
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM([],[])],
+  AC_MSG_RESULT(yes),
+  AC_MSG_RESULT(no)
+  CFLAGS="$old_CFLAGS")])
 
-AC_DISABLE_SHARED
+dnl Relatively generic flags
+AM_CHECK_CFLAG([-Wall])
+AM_CHECK_CFLAG([-Wextra])
+AM_CHECK_CFLAG([-Werror])
+AM_CHECK_CFLAG([-std=c99])
+AM_CHECK_CFLAG([-pedantic])
 
-case "$host" in
-  x86_64* | amd64*)
+case "$host_cpu" in
+  x86_64|amd64)
     ARCH=x86_64;;
-  i[3456]86 | x86)
+  x86|i[3456]86)
     ARCH=x86;;
-  armv7*)
+  arm*)
     ARCH=arm;;
   *)
     ARCH=generic;;

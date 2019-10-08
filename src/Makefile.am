@@ -1,9 +1,7 @@
-AUTOMAKE_OPTIONS = subdir-objects
-
-AM_CPPFLAGS = -I$(top_srcdir)/src/include \
-	      -I$(top_srcdir)/include \
-	      -I$(top_srcdir)/arch/$(ARCH) \
-	      -I$(top_srcdir)/arch/$(ARCH)/include
+AM_CPPFLAGS = -I./include \
+	      -I../include \
+	      -I../arch/$(ARCH) \
+	      -I../arch/$(ARCH)/include
 
 lib_LIBRARIES = libc.a
 
@@ -160,6 +158,8 @@ libc_a_SOURCES = \
 	unistd/unlink.c \
 	unistd/usleep.c \
 	unistd/write.c \
+	wait/wait.c \
 	wait/wait3.c \
-	wait/wait4.c
+	wait/wait4.c \
+	wait/waitpid.c
 

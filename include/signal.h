@@ -2,6 +2,7 @@
 #define _SIGNAL_H 1
 
 #include <features.h>
+#include <bits/signal.h>
 
 #define __need_pid_t
 #define __need_uid_t
@@ -22,17 +23,6 @@ __BEGIN_DECLS
 
 extern int raise(int);
 extern int kill(pid_t, int);
-
-#define SIG_DFL ((__sighandler_t)0)
-#define SIG_IGN ((__sighandler_t)1)
-#define SIG_ERR ((__sighandler_t)-1)
-
-#define SIGHUP  1
-#define SIGINT  2
-#define SIGQUIT 3
-#define SIGILL  4
-#define SIGTRAP 5
-#define SIGABRT 6
 
 __END_DECLS
 

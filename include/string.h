@@ -39,7 +39,9 @@ extern char *strncpy(char *, const char *, size_t);
 extern void *(memcpy)(void *, const void *, size_t);
 extern void *memmove(void *, const void *, size_t);
 
+#if _POSIX_C_SOURCE >= 200809L
 extern char *stpcpy(char *, const char *);
+#endif
 
 extern int strcmp(const char *, const char *);
 extern int (strcoll)(const char *, const char *);
@@ -70,7 +72,7 @@ extern size_t strcspn(const char *, const char *);
 
 extern char *strerror(int);
 
-#ifdef _GNU_SOURCE
+#ifdef _DEFAULT_SOURCE
 extern int ffsl(long);
 # if __STDC_VERSION__ >= 199901L
 extern int ffsll(long long);

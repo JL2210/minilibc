@@ -6,6 +6,7 @@ nobase_include_HEADERS = \
 	bits/fcntl.h \
 	bits/float.h \
 	bits/limits.h \
+	bits/signal.h \
 	bits/whence.h \
 	ctype.h \
 	elf.h \
@@ -39,6 +40,7 @@ nobase_include_HEADERS = \
 	sys/time.h \
 	sys/types.h \
 	sys/wait.h \
+	tar.h \
 	time.h \
 	unistd.h \
 	varargs.h

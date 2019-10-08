@@ -1,9 +1,9 @@
 #ifndef FCNTL_H
 #define FCNTL_H 1
 
-#include_next <fcntl.h>
+#include "../../include/fcntl.h"
 
-int __open(const char *, int, ...);
-int __openat(int, const char *, int, ...);
+extern int __open(const char *, int, ...);
+extern int __openat(int, const char *, int, ...);
 
 #endif
