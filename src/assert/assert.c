@@ -12,7 +12,7 @@ void __assert_fail
     if(!func) func = "unknown function";
     fprintf(stderr,
             "%s: %s:%u: %s: Assertion `%s' failed.\n",
-            __program_invocation_short_name,
+            __progname,
             file,
             line,
             func,

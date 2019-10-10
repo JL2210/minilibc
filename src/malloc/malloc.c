@@ -40,7 +40,7 @@ static void corrupted(const char *file, const char *func, int line)
 {
     fprintf(stderr,
             "*** %s: %s:%u: %s: double free or corruption\n",
-            __program_invocation_short_name,
+            __progname,
             file,
             line,
             func);

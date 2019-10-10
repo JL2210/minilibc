@@ -15,7 +15,7 @@ extern const char *program_invocation_name, *program_invocation_short_name;
 #endif
 
 #ifdef _DEFAULT_SOURCE
-extern const int sys_nerr;
+extern int sys_nerr;
 extern const char *const sys_errlist[];
 #endif
 

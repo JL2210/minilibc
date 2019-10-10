@@ -25,10 +25,10 @@
 __BEGIN_DECLS
 
 #if defined(_GNU_SOURCE)
-extern const int _sys_nerr;
+extern int _sys_nerr;
 extern const char *const _sys_errlist[];
 #elif defined(_DEFAULT_SOURCE)
-extern const int sys_nerr;
+extern int sys_nerr;
 extern const char *const sys_errlist[];
 #endif
 

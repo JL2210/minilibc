@@ -1,7 +1,8 @@
-AM_CPPFLAGS = -I./include \
-	      -I../include \
-	      -I../arch/$(ARCH) \
-	      -I../arch/$(ARCH)/include
+AM_CPPFLAGS = -I$(top_srcdir)/src/include \
+	      -I$(top_srcdir)/include \
+	      -I$(top_srcdir)/arch/$(ARCH) \
+	      -I$(top_srcdir)/arch/$(ARCH)/include \
+	      -I$(top_srcdir)/src/internal
 
 lib_LIBRARIES = libc.a
 
@@ -19,6 +20,27 @@ crti.o: $(top_srcdir)/arch/$(ARCH)/src/crt/crti.s
 
 crtn.o: $(top_srcdir)/arch/$(ARCH)/src/crt/crtn.s
 	$(CCAS) -c $(CFLAGS) -o $@ $^
+
+noinst_HEADERS = \
+	include/errno.h \
+	include/fcntl.h \
+	include/libc-deps.h \
+	include/signal.h \
+	include/stdio.h \
+	include/string.h \
+	include/sys/mman.h \
+	include/sys/stat.h \
+	include/sys/wait.h \
+	include/time.h \
+	include/unistd.h \
+	internal/atexit.h
+
+EXTRA_libc_a_SOURCES = \
+	crt/crt1.c \
+	../arch/$(ARCH)/src/crt/crti.s \
+	../arch/$(ARCH)/src/crt/crtn.s \
+	internal/int-format.c \
+	internal/printf-helpers.c
 
 libc_a_SOURCES = \
 	../arch/$(ARCH)/src/setjmp/setjmp.S \
@@ -42,7 +64,7 @@ libc_a_SOURCES = \
 	ctype/tolower.c \
 	ctype/toupper.c \
 	errno/errno.c \
-	errno/program_invocation_name.c \
+	errno/progname.c \
 	errno/sys_errlist.c \
 	errno/sys_nerr.c \
 	fcntl/openat.c \

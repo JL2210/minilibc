@@ -3,9 +3,9 @@
 
 #include "../../include/errno.h"
 
-extern const char *__program_invocation_name, *__program_invocation_short_name;
+extern char *__progname, *__progname_full;
 
-extern const int __sys_nerr;
+extern int __sys_nerr;
 extern const char *const __sys_errlist[];
 
 #endif

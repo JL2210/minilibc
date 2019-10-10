@@ -4,8 +4,8 @@
 #include <string.h>
 #include <stdarg.h>
 
-#include "static/int-format.c"
-#include "static/printf-helpers.c"
+#include "int-format.c"
+#include "printf-helpers.c"
 
 int vfprintf(FILE *fp, const char *fmt, va_list _ap)
 {

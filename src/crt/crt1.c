@@ -28,8 +28,8 @@ _Noreturn void _start_c(intptr_t *ptr)
     Elf_auxv_t *auxv;
     char **argv = (char **)ptr+1;
 
-    __program_invocation_name = *argv;
-    __program_invocation_short_name = strrchr(*argv, '/')+1;
+    __progname_full = *argv;
+    __progname = strrchr(*argv, '/')+1;
 
     __environ = argv + argc + 1;
 

@@ -37,7 +37,7 @@ extern int __fileno(FILE *);
 extern char *__gets(char *);
 extern char *gets(char *);
 
-extern const int __sys_nerr;
+extern int __sys_nerr;
 extern const char *const __sys_errlist[];
 
 #endif
