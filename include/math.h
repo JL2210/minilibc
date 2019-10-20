@@ -27,6 +27,8 @@
 
 #define isnan(x) ((x) != (x))
 
+__BEGIN_DECLS
+
 long double fabsl(long double);
 double fabs(double);
 float fabsf(float);
@@ -42,5 +44,7 @@ float nanf(const char *);
 long double sqrtl(long double);
 double sqrt(double);
 float sqrtf(float);
+
+__END_DECLS
 
 #endif

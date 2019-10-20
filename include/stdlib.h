@@ -15,7 +15,7 @@
 #define __need_wchar_t
 #define __need___compar_fn_t
 
-#if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
+#if __STDC_VERSION__ >= 199901L
 # define __need_lldiv_t
 #endif
 

@@ -16,20 +16,31 @@
     corrupted(__FILE__, __func__, __LINE__)
 
 #define LESSER(x, y) ((x) < (y) ? (x) : (y))
+#define GREATER(x, y) ((x) > (y) ? (x) : (y))
 
 struct malloc_chunk {
     size_t size;
-    unsigned char *start, *cur, *end;
+    unsigned char *cur, *end;
     struct malloc_chunk *prev;
     struct malloc_chunk *next;
+#if __STDC_VERSION__ >= 199901L
+    unsigned char start[];
+#else
+    unsigned char start[0];
+#endif
 };
 
 struct allocation_info {
     size_t size;
     unsigned int free:1;
-    unsigned char *start, *end;
+    unsigned char *end;
     struct allocation_info *prev;
     struct allocation_info *next;
+#if __STDC_VERSION__ >= 199901L
+    unsigned char start[];
+#else
+    unsigned char start[0];
+#endif
 };
 
 static size_t alloc_cnt;
@@ -66,8 +77,8 @@ static int get_next_chunk(size_t size)
             return -1;
     }
 
-    /* clear just the chunk in case we
-       forget to set one of the fields */
+    /* clear just the chunk so we don't
+       have to set all of the fields */
     memset(mallchunk, 0, sizeof(*mallchunk));
 
     if(!malloc_chunk)
@@ -83,8 +94,7 @@ static int get_next_chunk(size_t size)
         malloc_chunk = malloc_chunk->next;
     }
 
-    /* Set start address to just after the info. */
-    malloc_chunk->start = (void *)(malloc_chunk + 1);
+    /* The start is implicitly set */
     malloc_chunk->end = malloc_chunk->start + size;
     malloc_chunk->size = size;
 
@@ -113,7 +123,7 @@ static int get_next_allocation(size_t size, int align)
     alloc_size = size + (align - size % align) +
                  sizeof(struct allocation_info);
 
-    chunk_size = alloc_size > CHUNK_SIZE ? alloc_size : CHUNK_SIZE;
+    chunk_size = GREATER(alloc_size, CHUNK_SIZE);
 
     if(!malloc_chunk) /* First chunk */
         if(get_next_chunk(chunk_size) == -1)
@@ -122,7 +132,6 @@ static int get_next_allocation(size_t size, int align)
     if(!allocation_info) /* First allocation */
     {
         allocation_info = (void *)malloc_chunk->start;
-        allocation_info->start = (void *)(allocation_info + 1);
         malloc_chunk->cur =
           allocation_info->end = allocation_info->start + size;
         allocation_info->next = allocation_info->prev = NULL;
@@ -142,31 +151,31 @@ static int get_next_allocation(size_t size, int align)
         (ctr < alloc_cnt) && tmp_alloc;
         ctr++, tmp_alloc = tmp_alloc->next)
     {
-        if(tmp_alloc->free)
+        if(tmp_alloc->free &&
+             (tmp_alloc->size >= size ||
+               (tmp_alloc->end == malloc_chunk->cur &&
+                 malloc_chunk->end - tmp_alloc->start >= (ptrdiff_t)size)))
         {
-            if(tmp_alloc->size >= size)
+            /* We found a suitable allocation.
+               Unlink it from the list, possibly
+               expand it, and break from the loop. */
+            found_allocation = 1;
+
+            if(tmp_alloc->prev)
+                tmp_alloc->prev->next = tmp_alloc->next;
+
+            if(tmp_alloc->next)
+                tmp_alloc->next->prev = tmp_alloc->prev;
+
+            if(tmp_alloc->end == malloc_chunk->cur)
             {
-                /* We found a suitable allocation.
-                 * Now unlink it from the list and exit the loop.
-                 */
-                found_allocation = 1;
-                if(tmp_alloc->prev)
-                    tmp_alloc->prev->next = tmp_alloc->next;
-                if(tmp_alloc->next)
-                    tmp_alloc->next->prev = tmp_alloc->prev;
-                tmp_alloc->next = NULL;
-                break;
-            }
-            else if(tmp_alloc->end == malloc_chunk->cur &&
-                      malloc_chunk->end - tmp_alloc->start >= (ptrdiff_t)size)
-            {
-                /* We found an allocation that we can expand. */
-                found_allocation = 1;
                 tmp_alloc->size = size;
                 malloc_chunk->cur =
                   tmp_alloc->end = tmp_alloc->start + size;
-                break;
             }
+
+            tmp_alloc->next = NULL;
+            break;
         }
     }
 
@@ -184,7 +193,6 @@ static int get_next_allocation(size_t size, int align)
             tmp_alloc = (void *)malloc_chunk->cur;
         }
 
-        tmp_alloc->start = (void *)(tmp_alloc + 1);
         malloc_chunk->cur =
           tmp_alloc->end = tmp_alloc->start + size;
         tmp_alloc->next = NULL;
@@ -216,20 +224,15 @@ void *realloc(void *ptr, size_t size)
     if(!ptr)
         return malloc(size);
 
-
     /* rewind to the beginning of the list */
     while(allinfo->prev)
-    {
         allinfo = allinfo->prev;
-    }
 
     /* While the pointer passed is not equal to
        a pointer in the list, and if allinfo is
        not NULL, continue searching */
     while(allinfo && allinfo->start != ptr)
-    {
         allinfo = allinfo->next;
-    }
 
     /* If an invalid pointer was passed, give
        an error and abort */
@@ -278,23 +281,17 @@ void free(void *ptr)
 
     /* Rewind to the beginning of the list */
     while(allinfo->prev)
-    {
         allinfo = allinfo->prev;
-    }
 
     /* Search for the pointer */
     while(allinfo && allinfo->start != ptr)
-    {
         allinfo = allinfo->next;
-    }
 
     /* If the pointer was not found or
        if it has already been freed, give
        an error and abort */
     if(!allinfo || allinfo->free)
-    {
         ERROR_CORRUPT();
-    }
 
     /* zero out the memory to discourage use-
        after-free */

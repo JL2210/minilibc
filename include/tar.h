@@ -5,14 +5,12 @@
 
 /* General definitions */
  /* Used in the magic field in the ustar header block,
-  * including the trailing null byte
-  */
+    including the trailing null byte */
 #define TMAGIC   "ustar"
  /* Length in octets of the magic field */
 #define TMAGLEN  6
  /* Used in the version field in the ustar header block,
-  * excluding the trailing null byte
-  */
+    excluding the trailing null byte */
 #define TVERSION "00"
  /* Length in octets of the version field */
 #define TVERSLEN 2

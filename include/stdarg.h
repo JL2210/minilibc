@@ -9,7 +9,7 @@
 
 #if defined(__GNUC__)
 # define __va_copy(x, y) __builtin_va_copy(x, y)
-# if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
+# if __STDC_VERSION__ >= 199901L
 #  define va_copy(x, y) __va_copy(x, y)
 # endif
 # define va_start(x, y) __builtin_va_start(x, y)
@@ -18,7 +18,7 @@
 #else
 # if defined(__i386__) || defined(__i386)
 #  define __va_copy(x,y) ((x) = (y))
-#  if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
+#  if __STDC_VERSION__ >= 199901L
 #   define va_copy(x,y) __va_copy(x, y)
 #  endif
 #  define va_start(x, y) ((x) = (va_list)(&(y)+1))

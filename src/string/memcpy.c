@@ -3,12 +3,11 @@
 
 void *(memcpy)(void *restrict dest, const void *restrict src, size_t len)
 {
+    unsigned char *d = dest;
+    const unsigned char *s = src;
+
     while( len-- )
-    {
-        unsigned char *restrict dp = dest;
-        const unsigned char *restrict sp = src;
-        *dp++ = *sp++;
-    }
+        *d++ = *s++;
 
     return dest;
 }

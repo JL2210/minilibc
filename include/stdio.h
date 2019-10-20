@@ -47,7 +47,8 @@ extern int vsnprintf(char *, size_t, const char *, va_list);
 
 extern char *fgets(char *, int, FILE *);
 #if __STDC_VERSION__ < 201112L
-extern char *gets(char *) __attribute__((deprecated));
+__attribute__((deprecated))
+extern char *gets(char *);
 #endif
 extern int fgetc(FILE *);
 extern int getc(FILE *);
