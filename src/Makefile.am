@@ -21,19 +21,12 @@ crti.o: $(top_srcdir)/arch/$(ARCH)/src/crt/crti.s
 crtn.o: $(top_srcdir)/arch/$(ARCH)/src/crt/crtn.s
 	$(CCAS) -c $(CFLAGS) -o $@ $^
 
-noinst_HEADERS = \
-	include/errno.h \
-	include/fcntl.h \
-	include/libc-deps.h \
-	include/signal.h \
-	include/stdio.h \
-	include/string.h \
-	include/sys/mman.h \
-	include/sys/stat.h \
-	include/sys/wait.h \
-	include/time.h \
-	include/unistd.h \
-	internal/atexit.h
+install-exec-hook:
+	cd $(DESTDIR)$(crtdir) && \
+	  $(LN_S) -f crt1.o crt0.o && \
+	  $(LN_S) -f Scrt1.o Scrt0.o
+	cd $(DESTDIR)$(libdir) && \
+	  $(LN_S) -f libc.a libg.a
 
 EXTRA_libc_a_SOURCES = \
 	crt/crt1.c \
@@ -69,7 +62,20 @@ libc_a_SOURCES = \
 	errno/sys_nerr.c \
 	fcntl/openat.c \
 	fcntl/open.c \
-	libtcc/libtcc1.c \
+	include/errno.h \
+	include/fcntl.h \
+	include/libc-deps.h \
+	include/signal.h \
+	include/stdio.h \
+	include/string.h \
+	include/sys/mman.h \
+	include/sys/stat.h \
+	include/sys/wait.h \
+	include/time.h \
+	include/unistd.h \
+	internal/atexit.h \
+	internal/syscall_macros.h \
+	internal/syscall_ret.c \
 	malloc/malloc.c \
 	mman/mmap.c \
 	mman/mprotect.c \

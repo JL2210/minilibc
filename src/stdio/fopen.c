@@ -12,7 +12,7 @@ static inline int open_flags(const char *_mode)
     if(!strchr("rwa", *_mode))
     {
         errno = EINVAL;
-        return 0;
+        return -1;
     }
 
     if(strchr(_mode, '+'))
@@ -43,13 +43,15 @@ FILE *fopen(const char *path, const char *_mode)
     int mode = open_flags(_mode);
     FILE *fp;
 
-    if(mode == 0)
+    if(mode == -1)
         return NULL;
 
     fp = calloc(1, sizeof(*fp));
 
     if(!fp)
+    {
         return NULL;
+    }
 
     fp->flags = _F_NBF;
     fp->open_flags = mode;

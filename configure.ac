@@ -3,36 +3,10 @@ AC_INIT(minilibc, 0.0)
 AC_CONFIG_MACRO_DIRS([m4])
 AC_CONFIG_AUX_DIR([build-aux])
 
+AC_NO_EXECUTABLES
+
 AC_CANONICAL_BUILD
 AC_CANONICAL_HOST
-
-AC_PROG_RANLIB
-
-AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
-AM_PROG_AR
-AM_PROG_AS
-
-dnl Function to check cflags
-AC_DEFUN([AM_CHECK_CFLAG], [
-AC_MSG_CHECKING(whether the C compiler understands $1)
-old_AM_CFLAGS="$AM_CFLAGS"
-AM_CFLAGS="$AM_CFLAGS $1"
-old_CFLAGS="$CFLAGS"
-CFLAGS="$CFLAGS $AM_CFLAGS"
-AC_COMPILE_IFELSE([AC_LANG_PROGRAM([],[])],
-  AC_MSG_RESULT(yes)
-  CFLAGS="$old_CFLAGS",
-  AC_MSG_RESULT(no)
-  CFLAGS="$old_CFLAGS"
-  AM_CFLAGS="$old_AM_CFLAGS")])
-
-dnl Relatively generic flags
-AM_CHECK_CFLAG([-Wall])
-AM_CHECK_CFLAG([-Wextra])
-AM_CHECK_CFLAG([-Werror])
-AM_CHECK_CFLAG([-std=c99])
-AM_CHECK_CFLAG([-pedantic])
-AM_CHECK_CFLAG([-nostdinc])
 
 case "$host_cpu" in
   x86_64|amd64)
@@ -45,6 +19,35 @@ case "$host_cpu" in
     ARCH=generic;;
 esac
 
+AC_MSG_CHECKING([for valid prefix])
+dnl Not a bash extension, just m4 quoting
+if [[ x"$prefix" = "x/usr/local" ]]; then
+  AC_MSG_RESULT([no])
+  AC_MSG_ERROR([prefix is /usr/local])
+else
+  AC_MSG_RESULT([ok])
+fi
+
+AC_PROG_RANLIB
+AC_PROG_LN_S
+
+AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
+
+AM_PROG_AS
+AM_PROG_AR
+
+AC_PROG_RANLIB
+AC_PROG_LN_S
+
+m4_include([m4/check_cflag.m4])
+
+CHECK_CFLAG([-Wall])
+CHECK_CFLAG([-Wextra])
+CHECK_CFLAG([-Werror])
+CHECK_CFLAG([-std=c99])
+CHECK_CFLAG([-pedantic])
+CHECK_CFLAG([-nostdinc])
+
 AC_SUBST([ARCH])
 AC_SUBST([AM_CFLAGS])
 
@@ -52,6 +55,7 @@ AC_CONFIG_FILES([
   Makefile
   src/Makefile
   arch/Makefile
+  tools/Makefile
   include/Makefile
   arch/arm/Makefile
   arch/i386/Makefile

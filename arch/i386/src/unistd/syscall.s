@@ -18,17 +18,4 @@ __syscall:
 	pop %esi
 	pop %edi
 	pop %ebp
-	cmp $-4096, %eax
-	ja 0f
 	ret
-0:	neg %eax
-	mov %eax, %ecx
-	call __errno_location
-	mov %ecx, (%eax)
-	mov $-1, %eax
-	ret
-
-.weak _syscall
-.weak syscall
-.set _syscall, ___syscall
-.set syscall, __syscall

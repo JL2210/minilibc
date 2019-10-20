@@ -21,14 +21,7 @@ int __open(const char *pathname, int flags, ...)
         va_end(ap);
     }
 
-#if defined(SYS_openat)
-    return __syscall(SYS_openat, AT_FDCWD, pathname, flags, mode);
-#elif defined(SYS_open)
-    return __syscall(SYS_open, pathname, flags, mode);
-#else
-    errno = ENOSYS;
-    return -1;
-#endif
+    return __openat(AT_FDCWD, pathname, flags, mode);
 }
 
 weak_alias(__open, open);

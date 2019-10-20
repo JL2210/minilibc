@@ -42,6 +42,10 @@
 # endif
 #endif
 
+#ifndef PTRDIFF_MAX
+# define PTRDIFF_MAX INTPTR_MAX
+#endif
+
 #ifndef SIZE_MAX
 # ifdef __SIZE_MAX__
 #  define SIZE_MAX __SIZE_MAX__

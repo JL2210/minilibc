@@ -17,9 +17,6 @@ int __brk(void *ptr)
         return -1;
     else
         return 0;
-#else
-    errno = ENOSYS;
-    return -1;
 #endif
 }
 

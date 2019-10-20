@@ -2,11 +2,12 @@
 #define UNISTD_H 1
 
 #include "../../include/unistd.h"
+#include "syscall_macros.h"
 
 extern int __unlink(const char *);
 extern int __unlinkat(int, const char *, int);
 
-extern long __syscall(long, ...);
+extern long syscall(long, ...);
 
 extern char **__environ;
 

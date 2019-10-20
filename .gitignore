@@ -11,6 +11,5 @@ config.log
 config.status
 configure
 libtool
-m4/
 Makefile
 Makefile.in

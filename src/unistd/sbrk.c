@@ -16,9 +16,6 @@ void *__sbrk(intptr_t inc)
     return curbrk;
 #elif defined(SYS_sbrk)
     return __syscall(SYS_sbrk, inc);
-#else
-    errno = ENOSYS;
-    return (void *)-1;
 #endif
 }
 

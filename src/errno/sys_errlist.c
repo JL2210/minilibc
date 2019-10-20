@@ -45,6 +45,7 @@ const char *const __sys_errlist[] = {
     "Function not implemented",
     "Directory not empty",
     "Too many symbolic links encountered",
+    "Unknown error code",
     "No message of desired type",
     "Identifier removed",
     "Channel number out of range",

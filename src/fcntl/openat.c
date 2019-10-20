@@ -22,13 +22,9 @@ int __openat(int dirfd, const char *pathname, int flags, ...)
 
 #if defined(SYS_openat)
     return __syscall(SYS_openat, dirfd, pathname, flags, mode);
-#else
-# if defined(SYS_open)
+#elif defined(SYS_open)
     if(dirfd == AT_FDCWD)
         return __syscall(SYS_open, pathname, flags, mode);
-# endif
-    errno = ENOSYS;
-    return -1;
 #endif
 }
 
