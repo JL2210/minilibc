@@ -18,8 +18,7 @@ void *memmove(void *dest, const void *src, size_t len)
                use comparison operators. */
             if(s > d)
             {
-                /* take advantage of the fact that
-                   our memcpy copies forwards */
+                /* copy forwards down below */
                 break;
             }
             else /* (s < d) */
@@ -28,17 +27,17 @@ void *memmove(void *dest, const void *src, size_t len)
                 s += len;
                 d += len;
                 while(len--)
-                {
                     *--d = *--s;
-                }
+
                 goto end;
             }
         }
     }
 
     /* They don't overlap or the source is after
-       the destination, so just use memcpy */
-    memcpy(dest, src, len);
+       the destination, so just copy forwards */
+    while(len--)
+        *d++ = *s++;
 
 end:
     return dest;
