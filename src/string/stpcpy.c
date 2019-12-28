@@ -4,7 +4,9 @@
 
 char *__stpcpy(char *dest, const char *src)
 {
-    while((*dest = *src++)) dest++;
+    while((*dest = *src++))
+        dest++;
+
     return dest;
 }
 

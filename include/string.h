@@ -9,26 +9,18 @@
 
 #include <bits/alldefs.h>
 
-/* GNU extensions */
-#ifdef _GNU_SOURCE
-# define memmem __memmem
-# define memrchr __memrchr
-# define strchrnul __strchrnul
-#endif
-
-/* Inlining macros */
-#define strcoll(x, y) strcmp((x), (y))
-
-/* Optimizations */
 #ifdef __GNUC__
+# define strlen(str) __builtin_strlen(str)
 # define memset(dest, c, len) __builtin_memset(dest, c, len)
 # define memcpy(dest, src, len) __builtin_memcpy(dest, src, len)
 # define memchr(dest, c, len) __builtin_memchr(dest, c, len)
+# define ffsl(l) __builtin_ffsl(l)
+# define ffsll(l) __builtin_ffsll(l)
 #endif
 
 __BEGIN_DECLS
 
-extern size_t strlen(const char *);
+extern size_t (strlen)(const char *);
 extern size_t strnlen(const char *, size_t);
 
 extern char *strdup(const char *);
@@ -44,7 +36,7 @@ extern char *stpcpy(char *, const char *);
 #endif
 
 extern int strcmp(const char *, const char *);
-extern int (strcoll)(const char *, const char *);
+extern int strcoll(const char *, const char *);
 extern int strncmp(const char *, const char *, size_t);
 extern int memcmp(const void *, const void *, size_t);
 
@@ -54,6 +46,7 @@ extern char *strrchr(const char *, int);
 #ifdef _GNU_SOURCE
 extern char *strchrnul(const char *, int);
 extern void *memrchr(const void *, int, size_t);
+extern void *rawmemchr(const void *, int);
 
 extern void *memmem(const void *, size_t, const void *, size_t);
 #endif

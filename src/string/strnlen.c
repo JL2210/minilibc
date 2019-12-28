@@ -2,9 +2,10 @@
 
 size_t strnlen(const char *str, size_t len)
 {
-    size_t ctr = 0;
+    size_t i = 0;
 
-    while( ctr < len && *str ) ctr++, str++;
+    while( i < len && str[i] )
+        i++;
 
-    return ctr;
+    return i;
 }

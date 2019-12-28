@@ -2,6 +2,7 @@
 #define _SYS_STAT_H 1
 
 #include <features.h>
+#include <bits/stat.h>
 
 #define __need_dev_t
 #define __need_ino_t

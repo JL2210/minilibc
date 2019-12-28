@@ -52,6 +52,7 @@ extern char *gets(char *);
 #endif
 extern int fgetc(FILE *);
 extern int getc(FILE *);
+extern int ungetc(int, FILE *);
 extern int getchar(void);
 #define getc(fp) fgetc(fp)
 
@@ -75,6 +76,7 @@ extern size_t fwrite(const void *restrict, size_t, size_t, FILE *);
 extern int fseek(FILE *, long, int);
 extern long ftell(FILE *);
 extern int fflush(FILE *);
+extern void rewind(FILE *);
 
 extern void perror(const char *);
 

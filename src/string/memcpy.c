@@ -1,13 +1,16 @@
 #include <string.h>
-#include <stdint.h>
 
 void *(memcpy)(void *restrict dest, const void *restrict src, size_t len)
 {
     unsigned char *d = dest;
     const unsigned char *s = src;
 
-    while( len-- )
+    if(dest == src)
+        goto end;
+
+    while(len--)
         *d++ = *s++;
 
+end:
     return dest;
 }

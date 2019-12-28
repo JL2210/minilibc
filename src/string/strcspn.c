@@ -2,10 +2,11 @@
 
 size_t strcspn(const char *s, const char *rej)
 {
-    size_t len = strlen(rej)+1;
-    const char *o = s;
+    size_t len = strlen(rej) + 1, i = 0;
+    unsigned char *us = s;
 
-    while(!memchr(rej, *(unsigned char *)s, len)) s++;
+    while(!memchr(rej, s[i], len))
+        i++;
 
-    return (size_t)(s-o);
+    return i;
 }

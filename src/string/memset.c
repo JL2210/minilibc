@@ -2,9 +2,9 @@
 
 void *(memset)(void *ptr, int value, size_t len)
 {
-    unsigned char *p = (unsigned char *)ptr;
+    unsigned char *p = ptr;
 
-    while( len-- )
+    while(len--)
         *p++ = (unsigned char)value;
 
     return ptr;

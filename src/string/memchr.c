@@ -2,14 +2,13 @@
 
 void *(memchr)(const void *ptr, int c, size_t len)
 {
-    const unsigned char *s = (const unsigned char *)ptr;
+    const unsigned char *s = ptr;
 
-    while( len-- )
+    while( len && *s != (unsigned char)c )
     {
-        if( *s == (unsigned char)c )
-            return (void *)s;
         s++;
+        len--;
     }
 
-    return NULL;
+    return len ? (void *)s : NULL;
 }

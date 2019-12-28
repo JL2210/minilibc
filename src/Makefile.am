@@ -151,7 +151,6 @@ libc_a_SOURCES = \
 	string/strchr.c \
 	string/strchrnul.c \
 	string/strcmp.c \
-	string/strcoll.c \
 	string/strcpy.c \
 	string/strcspn.c \
 	string/strdup.c \

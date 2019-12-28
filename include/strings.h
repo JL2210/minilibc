@@ -8,6 +8,10 @@
 
 #include <bits/alldefs.h>
 
+#ifdef __GNUC__
+# define ffs(i) __builtin_ffs(i)
+#endif
+
 __BEGIN_DECLS
 
 extern int strncasecmp(const char *, const char *, size_t);

@@ -5,9 +5,9 @@
 
 int __ffs(int i)
 {
-    int l = sizeof(i)*CHAR_BIT, ctr = 0;
+    int l = sizeof(i) * CHAR_BIT, ctr = 0;
 
-    while( l-- )
+    while(l--)
     {
         if(i & (1u << ctr))
             return ++ctr;

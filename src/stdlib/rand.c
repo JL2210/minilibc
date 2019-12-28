@@ -12,6 +12,6 @@ void srand(unsigned s)
 
 int rand(void)
 {
-    seed = SEED*(seed + 1);
-    return seed>>33;
+    seed = SEED * (seed + 1);
+    return seed >> 33;
 }
