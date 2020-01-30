@@ -17,7 +17,7 @@
 #define __need_sig_atomic_t
 #define __need___sighandler_t
 
-#include <bits/alldefs.h>
+#include <bits/defs.h>
 
 __BEGIN_DECLS
 

@@ -2,5 +2,11 @@
 
 int ungetc(int c, FILE *stream)
 {
-    return *stream->shortbuf = (unsigned char)c;
+    if(!stream->ungetp || !stream->unget ||
+       c == EOF || stream->unget >= stream->unget_max)
+        return EOF;
+
+    stream->ungetp[stream->unget++] = c;
+
+    return c;
 }

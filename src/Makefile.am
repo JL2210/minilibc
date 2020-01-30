@@ -1,8 +1,11 @@
+ARCH = @ARCH@
+
 AM_CPPFLAGS = -I$(top_srcdir)/src/include \
 	      -I$(top_srcdir)/include \
 	      -I$(top_srcdir)/arch/$(ARCH) \
 	      -I$(top_srcdir)/arch/$(ARCH)/include \
-	      -I$(top_srcdir)/src/internal
+	      -I$(top_srcdir)/src/internal \
+	      -D_GNU_SOURCE
 
 lib_LIBRARIES = libc.a
 
@@ -28,17 +31,24 @@ install-exec-hook:
 	cd $(DESTDIR)$(libdir) && \
 	  $(LN_S) -f libc.a libg.a
 
+# TODO: Find an Automake variable for rm -f
+uninstall-hook:
+	cd $(DESTDIR)$(crtdir) && \
+	  rm -f crt0.0 Scrt0.o
+	cd $(DESTDIR)$(libdir) && \
+	  rm -f libg.a
+
 EXTRA_libc_a_SOURCES = \
 	crt/crt1.c \
-	../arch/$(ARCH)/src/crt/crti.s \
-	../arch/$(ARCH)/src/crt/crtn.s \
+	../arch/@ARCH@/src/crt/crti.s \
+	../arch/@ARCH@/src/crt/crtn.s \
 	internal/int-format.c \
 	internal/printf-helpers.c
 
 libc_a_SOURCES = \
-	../arch/$(ARCH)/src/setjmp/setjmp.S \
-	../arch/$(ARCH)/src/setjmp/longjmp.S \
-	../arch/$(ARCH)/src/unistd/syscall.s \
+	../arch/@ARCH@/src/setjmp/setjmp.S \
+	../arch/@ARCH@/src/setjmp/longjmp.S \
+	../arch/@ARCH@/src/unistd/syscall.s \
 	assert/assert.c \
 	ctype/isalnum.c \
 	ctype/isalpha.c \
@@ -130,6 +140,7 @@ libc_a_SOURCES = \
 	stdlib/getenv.c \
 	stdlib/labs.c \
 	stdlib/ldiv.c \
+	stdlib/llabs.c \
 	stdlib/lldiv.c \
 	stdlib/qsort.c \
 	stdlib/quick_exit.c \
@@ -181,6 +192,7 @@ libc_a_SOURCES = \
 	unistd/read.c \
 	unistd/sbrk.c \
 	unistd/sleep.c \
+	unistd/syscall.c \
 	unistd/unlinkat.c \
 	unistd/unlink.c \
 	unistd/usleep.c \

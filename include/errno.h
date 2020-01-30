@@ -8,10 +8,11 @@
 
 __BEGIN_DECLS
 
+__attribute__((const))
 extern int *__errno_location(void);
 
 #ifdef _GNU_SOURCE
-extern const char *program_invocation_name, *program_invocation_short_name;
+extern char *program_invocation_name, *program_invocation_short_name;
 #endif
 
 #ifdef _DEFAULT_SOURCE

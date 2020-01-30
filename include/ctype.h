@@ -5,7 +5,7 @@
 
 #define __need_locale_t
 
-#include <bits/alldefs.h>
+#include <bits/defs.h>
 
 #define _toupper(x) ((x)+('a'-'A'))
 #define _tolower(x) ((x)+('A'-'a'))

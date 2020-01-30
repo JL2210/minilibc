@@ -3,8 +3,14 @@
 #undef assert
 #undef __assert_func_name__
 
-#ifdef __GNUG__
-# define __assert_func_name__ __PRETTY_FUNCTION__
+#ifdef __cplusplus
+# if defined(__GNUG__)
+#  define __assert_func_name__ __PRETTY_FUNCTION__
+# elif __cplusplus >= 201103L
+#  define __assert_func_name__ __func__
+# else
+#  define __assert_func_name__ 0
+# endif
 #else
 # if __STDC_VERSION__ >= 199901L
 #  define __assert_func_name__ __func__
@@ -15,6 +21,12 @@
 
 #if __STDC_VERSION__ >= 201112L
 # define static_assert _Static_assert
+#endif
+
+#ifndef __cplusplus
+extern void abort();
+#else
+extern "C" void abort(...);
 #endif
 
 #ifdef NDEBUG

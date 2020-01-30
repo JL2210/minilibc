@@ -5,7 +5,7 @@
 
 #define __need_size_t
 
-#include <bits/alldefs.h>
+#include <bits/defs.h>
 
 #ifdef __GNUC__
 # define alloca(size) __builtin_alloca(size)

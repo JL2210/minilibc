@@ -2,10 +2,10 @@
 
 int fgetc(FILE *stream)
 {
-    int ret;
+    unsigned char c;
 
-    if(!fread(&ret, 1, 1, stream))
-        ret = EOF;
+    if(!fread(&c, 1, 1, stream))
+        return EOF;
 
-    return ret;
+    return c;
 }

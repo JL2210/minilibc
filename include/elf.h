@@ -10,7 +10,7 @@
 #define __need_Elf32_auxv_t
 #define __need_Elf64_auxv_t
 
-#include <bits/alldefs.h>
+#include <bits/defs.h>
 
 #define AT_NULL 0
 #define AT_IGNORE 1

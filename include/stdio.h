@@ -9,14 +9,21 @@
 #define __need_FILE
 #define __need_fpos_t
 #define __need_size_t
-#define __need_va_list
-#define __need___off_t
-#define __need_off_t
-#define __need_ssize_t
+#define __need___va_list
 
-#include <bits/alldefs.h>
+#if defined(_GNU_SOURCE) || \
+    defined(_BSD_SOURCE) || \
+    defined(_XOPEN_SOURCE) || \
+    defined(_POSIX_SOURCE) || \
+    defined(_POSIX_C_SOURCE)
+# define __need_off_t
+# define __need_ssize_t
+# define __need_va_list
+#endif
 
-#define BUFSIZ 0x1000
+#include <bits/defs.h>
+
+#define BUFSIZ 0x400
 
 #define _IONBF 0x1
 #define _IOFBF 0x2
@@ -32,22 +39,22 @@ extern int sys_nerr;
 extern const char *const sys_errlist[];
 #endif
 
-extern FILE *stdin;
-extern FILE *stdout;
-extern FILE *stderr;
+extern FILE *const stdin;
+extern FILE *const stdout;
+extern FILE *const stderr;
 
 extern int printf(const char *, ...);
 extern int fprintf(FILE *, const char *, ...);
-extern int vprintf(const char *, va_list);
-extern int vfprintf(FILE *, const char *, va_list);
+extern int vprintf(const char *, __va_list);
+extern int vfprintf(FILE *, const char *, __va_list);
 extern int sprintf(char *, const char *, ...);
 extern int snprintf(char *, size_t, const char *, ...);
-extern int vsprintf(char *, const char *, va_list);
-extern int vsnprintf(char *, size_t, const char *, va_list);
+extern int vsprintf(char *, const char *, __va_list);
+extern int vsnprintf(char *, size_t, const char *, __va_list);
 
 extern char *fgets(char *, int, FILE *);
 #if __STDC_VERSION__ < 201112L
-__attribute__((deprecated))
+__attribute__((__deprecated__))
 extern char *gets(char *);
 #endif
 extern int fgetc(FILE *);

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void *(memcpy)(void *restrict dest, const void *restrict src, size_t len)
+void *(memcpy)(void *dest, const void *src, size_t len)
 {
     const unsigned char *s = src;
     unsigned char *d = dest;

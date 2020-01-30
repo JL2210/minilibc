@@ -14,7 +14,8 @@ memmove:
 	add %edx, %edi
 	add %edx, %esi
 	std
-0:	rep movsb
+0:
+	rep movsb
 	cld
 	pop %esi
 	pop %edi

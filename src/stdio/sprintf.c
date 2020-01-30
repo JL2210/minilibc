@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdarg.h>
+#include <stdint.h>
 
 int sprintf(char *str, const char *fmt, ...)
 {
@@ -7,7 +8,7 @@ int sprintf(char *str, const char *fmt, ...)
     va_list ap;
 
     va_start(ap, fmt);
-    ret = vsprintf(str, fmt, ap);
+    ret = vsnprintf(str, SIZE_MAX, fmt, ap);
     va_end(ap);
 
     return ret;

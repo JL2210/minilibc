@@ -14,6 +14,6 @@
 #define __need_useconds_t
 #define __need_suseconds_t
 
-#include <bits/alldefs.h>
+#include <bits/defs.h>
 
 #endif

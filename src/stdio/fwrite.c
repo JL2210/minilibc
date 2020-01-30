@@ -10,7 +10,7 @@ size_t fwrite(const void *restrict ptr, size_t size, size_t count, FILE *stream)
     size_t len;
     ssize_t num_written;
 
-    if(mul_overflow(count, size, len))
+    if(umull_overflow(count, size, &len))
     {
         errno = EINVAL;
         return 0;

@@ -6,7 +6,7 @@
 #define __need_float_t
 #define __need_double_t
 
-#include <bits/alldefs.h>
+#include <bits/defs.h>
 
 #ifdef __GNUC__
 # define NAN __builtin_nanf("")

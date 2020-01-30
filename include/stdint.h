@@ -15,14 +15,22 @@
 #define __need_uint64_t
 #define __need_uintptr_t
 #define __need_uintmax_t
+#define __need_int_least8_t
+#define __need_int_least16_t
+#define __need_int_least32_t
+#define __need_int_least64_t
+#define __need_uint_least8_t
+#define __need_uint_least16_t
+#define __need_uint_least32_t
+#define __need_uint_least64_t
 
-#include <bits/alldefs.h>
+#include <bits/defs.h>
 
 #ifndef UINT8_MAX
 # ifdef __UINT8_MAX__
 #  define UINT8_MAX __UINT8_MAX__
 # else
-#  define UINT8_MAX ((uint8_t)-1)
+#  define UINT8_MAX 255
 # endif
 #endif
 
@@ -30,7 +38,7 @@
 # ifdef __UINTPTR_MAX__
 #  define UINTPTR_MAX __UINTPTR_MAX__
 # else
-#  define UINTPTR_MAX ((uintptr_t)-1)
+#  define UINTPTR_MAX (~0UL)
 # endif
 #endif
 
@@ -38,7 +46,7 @@
 # ifdef __INTPTR_MAX__
 #  define INTPTR_MAX __INTPTR_MAX__
 # else
-#  define INTPTR_MAX (((uintptr_t)-1)/2)
+#  define INTPTR_MAX (~0UL/2)
 # endif
 #endif
 
@@ -50,7 +58,7 @@
 # ifdef __SIZE_MAX__
 #  define SIZE_MAX __SIZE_MAX__
 # else
-#  define SIZE_MAX ((size_t)-1)
+#  define SIZE_MAX (~0UL)
 # endif
 #endif
 

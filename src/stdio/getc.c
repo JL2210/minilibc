@@ -2,5 +2,5 @@
 
 int (getc)(FILE *fp)
 {
-	return fgetc(fp);
+    return fgetc(fp);
 }

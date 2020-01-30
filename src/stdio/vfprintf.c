@@ -90,5 +90,7 @@ check_type:
         ctr++;
     }
 terminate:
+    va_end(ap);
+
     return num;
 }

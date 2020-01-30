@@ -240,7 +240,7 @@ void *realloc(void *ptr, size_t size)
         ERROR_CORRUPT();
 
     if((allinfo->end == malloc_chunk->cur &&
-          (size_t)(malloc_chunk->end - allinfo->start) >= size) ||
+         (size_t)(malloc_chunk->end - allinfo->start) >= size) ||
        /* If the end of this allocation is the
           end of the used portion of the chunk
           and we have enough free memory left
@@ -263,10 +263,11 @@ void *realloc(void *ptr, size_t size)
     {
         /* Allocate a new block of memory and copy
            the contents over */
-        void *newptr;
-        newptr = malloc(size);
+        void *newptr = malloc(size);
+
         memcpy(newptr, ptr, LESSER(allinfo->size, size));
         free(ptr);
+
         return newptr;
     }
 }
@@ -308,7 +309,7 @@ void *calloc(size_t nmemb, size_t size)
 
     /* Multiply the two arguments together
        while checking for overflow */
-    if(mul_overflow(size, nmemb, total_size))
+    if(umull_overflow(size, nmemb, &total_size))
     {
         /* Whoops, overflow. Set errno to
            ENOMEM and return error */

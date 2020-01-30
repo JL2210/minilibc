@@ -5,7 +5,7 @@
 # error "Never include <bits/syscall.h> directly; use <sys/syscall.h> instead."
 #endif
 
-#if (defined(__amd64) || defined(__amd64__))
+#ifdef __x86_64__
 # if defined(_ILP32) || defined(__ILP32__)
 #  include <bits/syscall_x32.h>
 # else

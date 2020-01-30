@@ -19,22 +19,18 @@
 # define __need_lldiv_t
 #endif
 
-#include <bits/alldefs.h>
+#include <bits/defs.h>
 
 #define atoi(x) ((int)atol((x)))
 
 #define EXIT_SUCCESS (0)
 #define EXIT_FAILURE (!EXIT_SUCCESS)
 
-#ifdef __INT_MAX__
-# define RAND_MAX __INT_MAX__
-#else
-# define RAND_MAX (((unsigned)-1)/2)
-#endif
+#define RAND_MAX INT_MAX
 
 __BEGIN_DECLS
 
-extern int atexit(void (*)(void));
+extern int atexit(void (*func)(void));
 extern _Noreturn void exit(int);
 extern _Noreturn void _Exit(int);
 extern _Noreturn void abort(void);
@@ -44,18 +40,32 @@ extern void *calloc(size_t, size_t);
 extern void *malloc(size_t);
 extern void free(void *);
 
-extern int (atoi)(const char *str);
-extern long (atol)(const char *str);
+extern div_t div(int, int);
+extern ldiv_t ldiv(long, long);
+#if __STDC_VERSION__ >= 199901L
+extern lldiv_t lldiv(long long, long long);
+#endif
+
+extern int abs(int);
+extern long labs(long);
+#if __STDC_VERSION__ >= 199901L
+extern long long llabs(long long);
+#endif
+
+extern int (atoi)(const char *);
+extern long (atol)(const char *);
 #if __STDC_VERSION__ >= 199901L
 extern long long atoll(const char *);
+#endif
 
+extern long (strtol)(const char *, char **, int);
+extern unsigned long (strtoul)(const char *, char **, int);
+#if __STDC_VERSION__ >= 199901L
 extern long long strtoll(const char *, char **, int);
 extern unsigned long long strtoull(const char *, char **, int);
 #endif
-extern long (strtol)(const char *, char **, int);
-extern unsigned long (strtoul)(const char *, char **, int);
 
-#if _POSIX_C_SOURCE >= 1 || _XOPEN_SOURCE || _POSIX_SOURCE
+#if _POSIX_C_SOURCE
 extern int rand_r(unsigned *);
 #endif
 extern int rand(void);

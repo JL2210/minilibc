@@ -10,7 +10,7 @@
 #define JB_BX 2
 #define JB_BP 3
 
-#ifdef __amd64__
+#ifdef __x86_64__
 # define JB_12 4
 # define JB_13 5
 # define JB_14 6

@@ -2,7 +2,7 @@
 
 char *strchr(const char *s, int c)
 {
-    const unsigned char *us = s;
+    const unsigned char *us = (const unsigned char *)s;
 
     while( *us != (unsigned char)c && *us )
          us++;

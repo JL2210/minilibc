@@ -15,7 +15,9 @@ typedef signed int int32_t;
 
 #if defined(__need_int64_t) && !defined(__defined_int64_t)
 # define __defined_int64_t
-# ifdef __LP64__
+# if __STDC_VERSION__ >= 199901L
+typedef signed long long int64_t;
+# elif defined(__LP64__)
 typedef signed long int64_t;
 # else
 __extension__ typedef signed long long int64_t;
@@ -49,7 +51,9 @@ typedef unsigned int uint32_t;
 
 #if defined(__need_uint64_t) && !defined(__defined_uint64_t)
 # define __defined_uint64_t
-# ifdef __LP64__
+# if __STDC_VERSION__ >= 199901L
+typedef unsigned long long uint64_t;
+# elif defined(__LP64__)
 typedef unsigned long uint64_t;
 # else
 __extension__ typedef unsigned long long uint64_t;
@@ -64,6 +68,58 @@ typedef unsigned long uintptr_t;
 #if defined(__need_uintmax_t) && !defined(__defined_uintmax_t)
 # define __defined_uintmax_t
 __extension__ typedef unsigned long long uintmax_t;
+#endif
+
+#if defined(__need_int_least8_t) && !defined(__defined_int_least8_t)
+# define __defined_int_least8_t
+typedef signed char int_least8_t;
+#endif
+
+#if defined(__need_int_least16_t) && !defined(__defined_int_least16_t)
+# define __defined_int_least16_t
+typedef signed short int_least16_t;
+#endif
+
+#if defined(__need_int_least32_t) && !defined(__defined_int_least32_t)
+# define __defined_int_least32_t
+typedef signed int int_least32_t;
+#endif
+
+#if defined(__need_int_least64_t) && !defined(__defined_int_least64_t)
+# define __defined_int_least64_t
+# if __STDC_VERSION__ >= 199901L
+typedef signed long long int_least64_t;
+# elif defined(__LP64__)
+typedef signed long int_least64_t;
+# else
+__extension__ typedef signed long long int_least64_t;
+# endif
+#endif
+
+#if defined(__need_uint_least8_t) && !defined(__defined_uint_least8_t)
+# define __defined_uint_least8_t
+typedef unsigned char uint_least8_t;
+#endif
+
+#if defined(__need_uint_least16_t) && !defined(__defined_uint_least16_t)
+#define __defined_uint_least16_t
+typedef unsigned short uint_least16_t;
+#endif
+
+#if defined(__need_uint_least32_t) && !defined(__defined_uint_least32_t)
+# define __defined_uint_least32_t
+typedef unsigned int uint_least32_t;
+#endif
+
+#if defined(__need_uint_least64_t) && !defined(__defined_uint_least64_t)
+# define __defined_uint_least64_t
+# if __STDC_VERSION__ >= 199901L
+typedef unsigned long long uint_least64_t;
+# elif defined(__LP64__)
+typedef unsigned long uint_least64_t;
+# else
+__extension__ typedef unsigned long long uint_least64_t;
+# endif
 #endif
 
 #if defined(__need_ptrdiff_t) && !defined(__defined_ptrdiff_t)
@@ -159,17 +215,25 @@ typedef float float_t;
 typedef double double_t;
 #endif
 
-#if defined(__need_va_list) && !defined(__defined_va_list)
-# define __defined_va_list
+#if defined(__need___va_list) && !defined(__defined___va_list)
+# define __defined___va_list
 # if defined(__GNUC__)
-typedef __builtin_va_list va_list;
+typedef __builtin_va_list __va_list;
 # else
-#  if defined(__i386__) || defined(__i386)
-typedef char *va_list;
+#  if defined(__i386__)
+typedef char *__va_list;
 #  else
-#   error "va_list has not been implemented for your platform."
+#   error "__va_list has not been implemented for your platform."
 #  endif
 # endif
+#endif
+
+#if defined(__need_va_list) && !defined(__defined_va_list)
+# define __defined_va_list
+# ifndef __defined___va_list
+#  error "__va_list must be present for va_list to be used"
+# endif
+typedef __va_list va_list;
 #endif
 
 #if defined(__need___compar_fn_t) && !defined(__defined___compar_fn_t)
@@ -332,7 +396,7 @@ typedef struct Elf_auxv_t
     {
         uintptr_t a_val;
         void *a_ptr;
-	void (*a_fcn)(void);
+    void (*a_fcn)(void);
     } a_un;
 } Elf_auxv_t;
 #endif

@@ -6,6 +6,8 @@ int puts(const char *str)
 
     if(putchar('\n') == EOF)
         ret = EOF;
+    else
+        ret++;
 
-    return ret == EOF ? ret : ret + 1;
+    return ret;
 }

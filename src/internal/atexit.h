@@ -10,7 +10,7 @@ typedef void (*atexit_func)(void);
 struct atexit {
         struct atexit *prev;
         atexit_func func[MIN_ATEXIT_MAX];
-        int8_t ctr;
+        uint8_t ctr;
         struct atexit *next;
 };
 

@@ -12,8 +12,9 @@ void *bsearch(const void *key,
 
     while(nmemb)
     {
-        cbase = (char *)base + size*(nmemb>>1);
+        cbase = (char *)base + size * (nmemb / 2);
         cmp = compar(key, cbase);
+
         if(!cmp)
         {
             return cbase;
@@ -23,6 +24,7 @@ void *bsearch(const void *key,
             base = cbase + size;
             nmemb--;
         }
+
         nmemb >>= 1;
     }
 

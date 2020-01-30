@@ -9,7 +9,7 @@
 #define __need_ptrdiff_t
 #define __need_max_align_t
 
-#include <bits/alldefs.h>
+#include <bits/defs.h>
 
 #if defined(__GNUC__)
 # define offsetof(type, member) __builtin_offsetof(type, member)

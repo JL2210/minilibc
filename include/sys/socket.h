@@ -5,7 +5,7 @@
 
 #define __need_socklen_t
 
-#include <bits/alldefs.h>
+#include <bits/defs.h>
 
 __BEGIN_DECLS
 __END_DECLS

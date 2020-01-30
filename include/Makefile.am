@@ -1,7 +1,7 @@
 nobase_include_HEADERS = \
 	alloca.h \
 	assert.h \
-	bits/alldefs.h \
+	bits/defs.h \
 	bits/errno.h \
 	bits/fcntl.h \
 	bits/float.h \

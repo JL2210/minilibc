@@ -59,5 +59,5 @@
 #define ENOANO       55      /* No anode */
 #define EBADRQC      56      /* Invalid request code */
 #define EBADSLT      57      /* Invalid slot */
-#define	EWOULDBLOCK  EAGAIN
-#define	EDEADLOCK    EDEADLK
+#define    EWOULDBLOCK  EAGAIN
+#define    EDEADLOCK    EDEADLK

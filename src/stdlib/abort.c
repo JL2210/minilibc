@@ -3,6 +3,6 @@
 
 _Noreturn void abort(void)
 {
-	for(;;)
-		raise(SIGABRT);
+    for(;;)
+        raise(SIGABRT);
 }

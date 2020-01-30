@@ -2,7 +2,6 @@
 #define _SYS_STAT_H 1
 
 #include <features.h>
-#include <bits/stat.h>
 
 #define __need_dev_t
 #define __need_ino_t
@@ -15,7 +14,7 @@
 #define __need_blkcnt_t
 #define __need_blksize_t
 
-#include <bits/alldefs.h>
+#include <bits/defs.h>
 
 __BEGIN_DECLS
 

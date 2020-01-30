@@ -5,32 +5,29 @@
 
 int fflush(FILE *ostream)
 {
-    int oflags;
-
     if(!ostream)
+        /* TODO: flush all output streams */
         ostream = stdout;
 
-    if(ostream == stdin)
-    {
-        fputs("Error: trying to fflush(stdin)\n", stderr);
-        abort();
-    }
-
-    oflags = (ostream->open_flags & O_RDWR ||
-              ostream->open_flags & O_WRONLY);
-
-
-    if(oflags && ostream->ptr != ostream->base)
+    if((ostream->open_flags & O_RDWR ||
+        ostream->open_flags & O_WRONLY) &&
+        ostream->ptr != ostream->base)
     {
         ssize_t size =
-               ostream->write(ostream,
-                              ostream->base,
-                              ostream->ptr - ostream->base);
+          ostream->write(ostream,
+                         ostream->base,
+                         ostream->ptr - ostream->base);
 
-        if(size == -1) return EOF;
+        if(size == -1)
+            return EOF;
 
         ostream->ptr = ostream->base;
         __fsync(ostream->fileno);
+    }
+    else if(ostream->open_flags & O_RDONLY)
+    {
+        fputs("Error: trying to fflush input stream\n", stderr);
+        abort();
     }
 
     return 0;

@@ -8,15 +8,17 @@ char *fgets(char *str, int len, FILE *stream)
     while(--len && ch != '\n')
     {
         ch = fgetc(stream);
+
         if(ch == EOF)
         {
             str = NULL;
-            goto ret;
+            goto terminate;
         }
+
         *tmp++ = (unsigned char)ch;
     }
 
+terminate:
     *tmp = 0;
-ret:
     return str;
 }

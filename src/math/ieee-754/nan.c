@@ -10,7 +10,7 @@ type NAME_SFX(nan)(const char *tag)
 
     a.o.s = 0;
     a.o.e = EXPONENT_MASK;
-    a.o.m = tag_i ? tag_i : (mantissa)1 << (MANTISSA_SIZE-1);
+    a.o.m = tag_i ? tag_i : (mantissa)1 << (MANTISSA_SIZE - 1);
 
     return a.f;
 }

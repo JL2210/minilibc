@@ -8,7 +8,7 @@
 #define __need_pid_t
 #define __need_mode_t
 
-#include <bits/alldefs.h>
+#include <bits/defs.h>
 
 __BEGIN_DECLS
 

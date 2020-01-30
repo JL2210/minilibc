@@ -3,7 +3,6 @@
 #include <errno.h>
 #include <string.h>
 #include <stdlib.h>
-#include <unistd.h>
 
 static inline int open_flags(const char *_mode)
 {
@@ -41,31 +40,47 @@ static inline int open_flags(const char *_mode)
 FILE *fopen(const char *path, const char *_mode)
 {
     int mode = open_flags(_mode);
-    FILE *fp;
+    FILE *fp = malloc(sizeof(*fp));
 
-    if(mode == -1)
+    if( mode == -1 || !fp )
         return NULL;
 
-    fp = calloc(1, sizeof(*fp));
+    fp->open_flags = mode;
 
-    if(!fp)
+    if( (mode & O_RDWR) || (mode & O_RDONLY) )
     {
-        return NULL;
+        fp->ungetp = malloc(UNGET + BUFSIZ);
+        fp->unget_max = UNGET;
+        fp->flags = _F_FBF;
+    }
+    else
+    {
+        fp->ungetp = malloc(BUFSIZ);
+        fp->unget_max = 0;
+        fp->flags = _F_LBF;
     }
 
-    fp->flags = _F_NBF;
-    fp->open_flags = mode;
+    if(!fp->ungetp)
+        goto cleanup;
+
+    fp->base = fp->ptr = fp->ungetp + fp->unget_max;
+    fp->end = fp->base + BUFSIZ;
     fp->read = __stdio_read;
     fp->write = __stdio_write;
     fp->seek = __stdio_seek;
     fp->close = __stdio_close;
-    fp->fileno = __open(path, mode, 0666);
+    memset(&fp->offset, 0, sizeof(fp->offset));
+    fp->unget = 0;
 
+    fp->fileno = __open(path, mode, 0666);
     if(fp->fileno == -1)
     {
-        free(fp);
-        return NULL;
+        free(fp->ungetp);
+        goto cleanup;
     }
 
     return fp;
+cleanup:
+    free(fp);
+    return NULL;
 }

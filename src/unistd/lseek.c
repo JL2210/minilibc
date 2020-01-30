@@ -8,8 +8,8 @@ off_t __lseek(int fd, off_t offset, int whence)
 {
 #ifdef SYS__llseek
     off_t result;
-    return __syscall(SYS__llseek, fd, (uint32_t)(offset>>32),
-                    (uint32_t)offset, &result, whence) ? -1 : result;
+    return __syscall(SYS__llseek, fd, (uint_least32_t)(offset >> 32),
+                    (uint_least32_t)offset, &result, whence) ? -1 : result;
 #else
     return __syscall(SYS_lseek, fd, offset, whence);
 #endif

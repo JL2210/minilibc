@@ -14,7 +14,7 @@
 #define __need_intptr_t
 #define __need_useconds_t
 
-#include <bits/alldefs.h>
+#include <bits/defs.h>
 
 __BEGIN_DECLS
 

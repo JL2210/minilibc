@@ -10,6 +10,7 @@ memmove:
 	add %rdx, %rdi
 	add %rdx, %rsi
 	std
-0:	rep movsb
+0:
+	rep movsb
 	cld
 	ret

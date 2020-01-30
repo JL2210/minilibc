@@ -3,8 +3,8 @@
 
 int strncasecmp(const char *str1, const char *str2, size_t len)
 {
-    const unsigned char *s1 = str1,
-                        *s2 = str2;
+    const unsigned char *s1 = (const unsigned char *)str1,
+                        *s2 = (const unsigned char *)str2;
 
     while( len-- && *s1 && tolower(*s1) == tolower(*s2) )
     {

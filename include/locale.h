@@ -5,9 +5,16 @@
 
 #define __need_NULL
 #define __need_lconv
-#define __need_locale_t
 
-#include <bits/alldefs.h>
+#if defined(_GNU_SOURCE) || \
+    defined(_BSD_SOURCE) || \
+    defined(_XOPEN_SOURCE) || \
+    defined(_POSIX_SOURCE) || \
+    defined(_POSIX_C_SOURCE)
+# define __need_locale_t
+#endif
+
+#include <bits/defs.h>
 
 __BEGIN_DECLS
 

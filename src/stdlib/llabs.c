@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <limits.h>
 
-long labs(long a)
+long long llabs(long long a)
 {
-    if(a == LONG_MIN)
+    if(a == LLONG_MIN)
     {
-        fputs("Result of labs() cannot be represented!\n", stderr);
+        fputs("Result of llabs() cannot be represented!\n", stderr);
         abort();
     }
 

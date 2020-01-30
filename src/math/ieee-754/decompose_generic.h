@@ -7,10 +7,12 @@ extern "C" {
 
 #define SIGN_SIZE 1
 
-union decompose {
+union decompose
+{
     type f;
     int_rep i;
-    struct decompose_s {
+    struct decompose_s
+    {
         mantissa m:MANTISSA_SIZE;
         exponent e:EXPONENT_SIZE;
         sign s:SIGN_SIZE;
@@ -20,7 +22,9 @@ union decompose {
 static inline union decompose decompose(type f)
 {
     union decompose result;
+
     result.f = f;
+
     return result;
 }
 

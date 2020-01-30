@@ -6,9 +6,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 
-#ifndef _GENERIC_START
-# include "_start.h"
-#endif
+#include "_start.h"
 
 #if UINTPTR_MAX == 0xffffffffffffffffUL
 # define Elf_auxv_t Elf64_auxv_t
