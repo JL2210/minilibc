@@ -3,7 +3,7 @@ minilibc
 
 I've realized how daunting and unreasonable
 the task of writing a standard C library is,
-so I'm going to achive this. It probably
+so I'm going to archive this. It probably
 doesn't work in it's current state, but feel
 free to fiddle with or fork it.
 
